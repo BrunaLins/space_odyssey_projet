@@ -34,7 +34,7 @@ class TypeHebergement
     private $sejours;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Commande", mappedBy="hebergement")
+     * @ORM\OneToMany(targetEntity="App\Entity\Commande", mappedBy="type_hebergement")
      */
     private $commandes;
 
@@ -116,7 +116,7 @@ class TypeHebergement
     {
         if (!$this->commandes->contains($commande)) {
             $this->commandes[] = $commande;
-            $commande->setHebergement($this);
+            $commande->setTypeHebergement($this);
         }
 
         return $this;
@@ -127,8 +127,8 @@ class TypeHebergement
         if ($this->commandes->contains($commande)) {
             $this->commandes->removeElement($commande);
             // set the owning side to null (unless already changed)
-            if ($commande->getHebergement() === $this) {
-                $commande->setHebergement(null);
+            if ($commande->getTypeHebergement() === $this) {
+                $commande->setTypeHebergement(null);
             }
         }
 
