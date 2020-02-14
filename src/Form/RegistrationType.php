@@ -30,7 +30,7 @@ class RegistrationType extends AbstractType
             ->add ('adresse',TextType::class,
                 ['label'=>'Adresse'])
             ->add('codepostal',TextType::class,[
-                'label'=>'Codepostal'
+                'label'=>'Code postal'
             ])
            ->add('ville',TextType::class,[
                'label'=>'Ville'
@@ -40,7 +40,7 @@ class RegistrationType extends AbstractType
             ])
             ->add('email',
                 EmailType::class,
-                ['label'=> 'Email'])
+                ['label'=> 'E-mail'])
             ->add('plainPassword',
                 RepeatedType::class,
                 [
@@ -52,7 +52,7 @@ class RegistrationType extends AbstractType
                     'second_options'=>[
                         'label'=> 'Confirmation du mot de passe'
                     ],
-                    'invalid_message' => 'La confirmation ne correspond pas u mot de passe'
+                    'invalid_message' => 'La confirmation ne correspond pas au mot de passe'
                 ]
             )
 

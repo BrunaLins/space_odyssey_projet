@@ -1,9 +1,13 @@
-{% extends 'baseadmin.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {%  block body %}
-    <h1>Gestion Sejours</h1>
+    <br>
+    <h2>Gestion Sejours</h2>
+    <br>
 
-
+   <a href="{{ path('app_admin_sejour_edit') }}" class="btn btn-outline-secondary mb-3">
+        Créer un séjour
+    </a>
 
     <table class="table">
         <tr class="table-dark">
@@ -26,10 +30,10 @@
                 <td>{{ sejour.stock }}</td>
                 <td>{{ sejour.prixSejour }}</td>
                 <td>
-                    <a href="{{ path('app_admin_sejour_edit', {'id': sejour.id}) }}" class="btn btn-primary">
+                    <a href="{{ path('app_admin_sejour_edit', {'id': sejour.id}) }}" class="btn btn-secondary">
                         Modifier
                     </a>
-                    <a href="{{ path('app_admin_sejour_edit', {'id': sejour.id}) }}" class="btn btn-danger">
+                    <a href="{{ path('app_admin_sejour_delete', {'id': sejour.id}) }}" class="btn btn-danger">
                         Supprimer
                     </a>
                 </td>

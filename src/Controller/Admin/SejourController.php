@@ -35,7 +35,7 @@ class SejourController extends AbstractController
     }
 
     /**
-     * @Route("/edition/{id}"), defaults={"id":null}, requirements={"id": "\d+"})
+     * @Route("/edition/{id}", defaults={"id":null}, requirements={"id": "\d+"})
      */
     public function edit(Request $request, EntityManagerInterface $manager, $id)
     {
@@ -44,9 +44,9 @@ class SejourController extends AbstractController
         } else { // on recupère le séjour et on le modifie
             $sejour = $manager->find(Sejour::class, $id);
 
-            /*if(is_null($sejour)) {
+            if(is_null($sejour)) {
                 throw new NotFoundHttpException();
-            }*/
+            }
         }
 
         $form = $this->createForm(SejourType::class, $sejour);
@@ -57,12 +57,11 @@ class SejourController extends AbstractController
 
                 $manager->persist($sejour);
                 $manager->flush();
-                // faire message de succès addFlash
-                return $this->redirectToRoute('app_index_index');
+                $this->addFlash('success', 'Le séjour est enregistré');
+                return $this->redirectToRoute('app_admin_sejour_index');
             } else {
-                echo 'probleme';
+                $this->addFlash('error', 'Le formulaire contient des erreurs');
             }
-
         }
 
         return $this->render(
@@ -71,6 +70,18 @@ class SejourController extends AbstractController
         );
     }
 
+    /**
+     * @Route("/suppression/{id}", requirements={"id": "\d+"})
+     */
+    public function delete(EntityManagerInterface $manager, Sejour $sejour)
+    {
+        $manager->remove($sejour);
+        $manager->flush();
+
+        $this->addFlash('success', 'Le sejour est supprimé');
+
+        return $this->redirectToRoute('app_admin_sejour_index');
+    }
 
 
 

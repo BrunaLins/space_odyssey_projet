@@ -50,7 +50,10 @@ class SejourType extends AbstractType
                 ['label' => 'Durée']
                 // TODO : A faire en liste deroulante
             )
-            // TODO : faire date de départ
+            ->add('image_1',
+                TextType::class,
+                ['label' => 'Image 1']
+            )
             ->add('stock',
                 IntegerType::class,
                 ['label' => 'Nombre de places restantes']

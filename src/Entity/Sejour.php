@@ -89,6 +89,7 @@ class Sejour
     {
         $this->commandes = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->mois_depart = new \DateTime();
     }
 
     public function getId(): ?int
