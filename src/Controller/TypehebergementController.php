@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Class TypehebergementController
  * @package App\Controller
- * @Route("/hebergement")
+ * @Route("/typehebergement")
  */
 class TypehebergementController extends AbstractController
 {
@@ -20,11 +20,12 @@ class TypehebergementController extends AbstractController
     public function index(TypeHebergementRepository $repository)
     {
 
-        $hebergements = $repository->findAll();
+        $typehebergements = $repository->findAll();
+        dump($typehebergements);
 
         return $this->render('typehebergement/index.html.twig',
          [
-            'hebergements' => $hebergements,
+            'typehebergements' => $typehebergements
         ]
         );
     }

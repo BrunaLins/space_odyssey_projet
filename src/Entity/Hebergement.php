@@ -27,6 +27,12 @@ class Hebergement
      */
     private $destination;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\TypeHebergement", inversedBy="hebergements")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $type_hebergement;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -52,6 +58,18 @@ class Hebergement
     public function setDestination(?Destination $destination): self
     {
         $this->destination = $destination;
+
+        return $this;
+    }
+
+    public function getTypeHebergement(): ?TypeHebergement
+    {
+        return $this->type_hebergement;
+    }
+
+    public function setTypeHebergement(?TypeHebergement $type_hebergement): self
+    {
+        $this->type_hebergement = $type_hebergement;
 
         return $this;
     }

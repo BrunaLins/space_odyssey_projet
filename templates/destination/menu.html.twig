@@ -1,15 +1,15 @@
-
-
-
-
-    <ul>
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarDestinations" aria-controls="navbarDestinations" aria-expanded="false">
+    <span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarDestination">
+    <ul class="navbar-nav">
         {% for destination in destinations %}
-            <li>
-                <a href="{{  path('app_destination_index',{'id': destination.id}) }}">
+            <li class="nav-item">
+                <a class="nav-link">
                     {{ destination.nom }}
                 </a>
-
             </li>
         {% endfor %}
 
     </ul>
+</div>
