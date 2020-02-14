@@ -1,0 +1,17 @@
+
+
+{% block body %}
+
+
+    <ul>
+        {% for hebergement in hebergements %}
+            <li>
+                <a href="{{  path('app_typehebergement_index') }}">
+                    {{ hebergement.nom }}
+                </a>
+
+            </li>
+        {% endfor %}
+
+    </ul>
+{% endblock %}
