@@ -28,9 +28,15 @@ class Destination
      */
     private $sejours;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Hebergement", mappedBy="destination")
+     */
+    private $hebergements;
+
     public function __construct()
     {
         $this->sejours = new ArrayCollection();
+        $this->hebergements = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -75,6 +81,37 @@ class Destination
             // set the owning side to null (unless already changed)
             if ($sejour->getDestination() === $this) {
                 $sejour->setDestination(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Hebergement[]
+     */
+    public function getHebergements(): Collection
+    {
+        return $this->hebergements;
+    }
+
+    public function addHebergement(Hebergement $hebergement): self
+    {
+        if (!$this->hebergements->contains($hebergement)) {
+            $this->hebergements[] = $hebergement;
+            $hebergement->setDestination($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHebergement(Hebergement $hebergement): self
+    {
+        if ($this->hebergements->contains($hebergement)) {
+            $this->hebergements->removeElement($hebergement);
+            // set the owning side to null (unless already changed)
+            if ($hebergement->getDestination() === $this) {
+                $hebergement->setDestination(null);
             }
         }
 
