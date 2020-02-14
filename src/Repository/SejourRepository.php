@@ -2,9 +2,11 @@
 
 namespace App\Repository;
 
+use App\Entity\Search;
 use App\Entity\Sejour;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\Query;
 
 /**
  * @method Sejour|null find($id, $lockMode = null, $lockVersion = null)
@@ -47,4 +49,47 @@ class SejourRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    /**
+     * fonction de recherche grâce au formulaire
+     * @param array $search
+     * @return array
+     */
+    public function findAllTri(array $search): array
+    {
+dump($search);
+        $qb = $this->createQueryBuilder('s');
+
+        if (!empty($search['destination'])) {
+            $qb
+                ->andWhere('s.destination = :destination')
+                ->setParameter('destination', $search['destination'])
+            ;
+
+        }
+
+        if (!empty($search['typeHebergement'])) {
+            $qb
+                ->andWhere('s.type_hebergement = :typeHebergement')
+                ->setParameter('typeHebergement', $search['typeHebergement'])
+            ;
+        }
+
+        return $qb->getQuery()->getResult();
+
+
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

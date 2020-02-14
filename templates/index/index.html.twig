@@ -111,5 +111,29 @@
 
     <br>
     <br>
+{# Creation du formulaire#}
+
+  <div class="jumbotron bg-dark" style="color: white">
+      <h4 class="text-center">Votre recherche</h4>
+      <div class="container">
+         {{ form_start(form) }}
+          <div class="row">
+              <div class="col">
+                  {{ form_row(form.destination) }}
+              </div>
+              <div class="col">
+                  {{ form_row(form.typeHebergement) }}
+              </div>
+              <div class="col">
+                  <button class="btn btn-info">Rechercher</button>
+              </div>
+          </div>
+
+
+          {{ form_end(form) }}
+      </div>
+  </div>
+{# Fin Creation du formulaire#}
+
 
 {% endblock %}

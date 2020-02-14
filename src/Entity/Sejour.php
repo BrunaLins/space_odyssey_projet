@@ -2,9 +2,11 @@
 
 namespace App\Entity;
 
+
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SejourRepository")
@@ -81,7 +83,7 @@ class Sejour
     private $commandes;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="sejour")
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="sejour",cascade={"remove"})
      */
     private $comments;
 

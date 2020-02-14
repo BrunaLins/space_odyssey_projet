@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ sejour.titre }}
+{% endblock %}
+
+{% block body %}
+    <h1>{{ sejour.titre }}</h1>
+    <p>
+        <strong>{{ sejour.titre }}</strong>
+        <br>
+        <em>{{ sejour.duree}}</em>
+
+
+
+    <p>{{ sejour.description|nl2br }}</p>
+    <h2>Commentaires</h2>
+    {% if app.user is null%}
+        <div>Vous devez
+            <a href="{{ path('app_user_login') }}">Vous connecter</a>Pour publier un commentaire</div>
+    {% else %}
+        {{ form_start(form) }}
+        {{ form_row(form.contenu) }}
+        {{ form_row(form.note) }}
+
+        <div>
+            <button type="submit" class="">Envoyer</button>
+        </div>
+        {{ form_end(form) }}
+    {% endif %}
+    {% for comment in sejour.comments %}
+        <h5>{{ comment.user }}
+        <div class="">
+            <div class="">
+                {{ comment.contenu|nl2br }}
+            </div>
+        </div>
+    {% else %}
+        <p>Aucun commentaire pour cet sejour</p>
+
+    {% endfor %}
+
+{% endblock %}
+

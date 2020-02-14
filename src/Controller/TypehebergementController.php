@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Class TypehebergementController
  * @package App\Controller
- * @Route("/typehebergement")
+ * @Route("/hebergement")
  */
 class TypehebergementController extends AbstractController
 {
@@ -24,7 +24,7 @@ class TypehebergementController extends AbstractController
 
         return $this->render('typehebergement/index.html.twig',
          [
-            'typehebergements' => $typehebergements
+            'hebergements' => $hebergements,
         ]
         );
     }
