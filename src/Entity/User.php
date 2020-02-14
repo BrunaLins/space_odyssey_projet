@@ -5,11 +5,16 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @UniqueEntity(fields={"email"}, message ="Un utilisateur existe déjà avec cet email")
  */
-class User
+class User implements UserInterface, \Serializable
 {
     /**
      * @ORM\Id()
@@ -38,6 +43,17 @@ class User
      */
     private $email;
 
+
+    /**
+     * @var string
+     *
+     * @Assert\NotBlank(message="Le mot de passe est obligatoire")
+     * @Assert\Regex(pattern="/^(?=.*[0-9])(?=.*[A-Z]).{6,20}$/")
+     * message ="Le mot de passe doit faire entre 6 et 20 caractères en contenir au moins une majuscule et un chiffre")
+     * message ="Mot de passe invalide")
+     */
+    private $plainPassword;
+
     /**
      * @ORM\Column(type="string", length=255)
      */
@@ -46,8 +62,7 @@ class User
     /**
      * @ORM\Column(type="string", length=20)
      */
-    private $role;
-
+    private $role ='ROLE_USER';
     /**
      * @ORM\Column(type="string", length=100)
      */
@@ -82,6 +97,10 @@ class User
     {
         $this->commandes = new ArrayCollection();
         $this->comments = new ArrayCollection();
+    }
+    public function __toString()
+    {
+        return $this->nom . '' . $this->prenom;
     }
 
     public function getId(): ?int
@@ -269,5 +288,97 @@ class User
         }
 
         return $this;
+    }
+
+
+    /**
+     * @return string|null
+     */
+    public function getPlainPassword(): ?string
+    {
+        return $this->plainPassword;
+    }
+
+    /**
+     * @param string|null $plainPassword
+     * @return User
+     */
+    public function setPlainPassword(?string $plainPassword): User
+    {
+        $this->plainPassword = $plainPassword;
+        return $this;
+
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getRoles()
+    {
+        return [$this->role];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getSalt()
+    {
+        // inutile car le sel est dans l'aligo de cryptage
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getUsername()
+    {
+        // l'authenifiant est l'email
+        return $this->email;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function eraseCredentials()
+    {
+
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function serialize()
+    {
+        return serialize([
+            $this->id,
+            $this->civilite,
+            $this->nom,
+            $this->prenom,
+            $this->email,
+            $this->adresse,
+            $this->codepostal,
+            $this->role,
+            $this->password,
+            $this->ville,
+            $this->pays
+        ]);
+    }
+    /**
+     * @inheritDoc
+     */
+    public function unserialize($serialized)
+    {
+        list($this->id,
+            $this->civilite,
+            $this->nom,
+            $this->prenom,
+            $this->email,
+            $this->adresse,
+            $this->codepostal,
+            $this->role,
+            $this->password,
+            $this->ville,
+            $this->pays
+            ) = unserialize($serialized);
+
     }
 }
