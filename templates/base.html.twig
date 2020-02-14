@@ -6,66 +6,100 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
           crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('asset/css/spaceodyssey.css') }}">
 </head>
 <body>
-<nav>
-    <div>
-        <a href="{{ path('app_index_index') }}" class="">
-            Voyage Interstellaire
-        </a>
 
-        {{ render(controller('App\\Controller\\DestinationController::menu')) }}
+{#    ----------------------------------  NAVBAR  ----------------------------------------- #}
+<div class="container-fluid">
+
+
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+        <a class="navbar-brand" href="{{ path('app_index_index') }}">Space Odyssey</a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+                aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Stations Spatiale</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Lune</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Mars</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Proxima Centauri</a>
+                    </li>
+
+{#             ---------------  connexion deconnexion nom user  -----------------------------#}
+                    {% if app.user is null%}
+                        <li>
+                            <a href="{{ path('app_user_register') }}" class="nav-link ">Inscription</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ path('app_user_login') }}" class="nav-link ">Connexion</a>
+                        </li>
+                    {% else %}
+                        <li class="">
+                            <span>{{ app.user }}</span>
+                        </li>
+                        <li>
+                            <a href="{{ path('app_user_logout') }}" class="nav-link float-right">Déconnexion</a>
+                        </li>
+                    {% endif %}
+            </ul>
+        </div>
+    </nav>
+</div>
+{#  ---------------------------------------------------------------------------------------  #}
+
+{#        <a href="{{ path('app_index_index') }}" class="">#}
+{#            Voyage Interstellaire#}
+{#        </a>#}
+
+{#        {{ render(controller('App\\Controller\\DestinationController::menu')) }}#}
 
 
         <!-- <video autoplay muted loop id="myVideo">
              <source src="asset/myvideo.mp4" type="video/mp4">
          </video>-->
 
-        <ul>
 
-            {% if app.user is null%}
-                <li>
-                    <a href="{{ path('app_user_register') }}" class="">Inscription
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ path('app_user_login') }}" class="">Connexion</a>
-                </li>
-            {% else %}
-                <li class="">
-                <span>
-                        {{ app.user }}
-                    </span>
-                </li>
-                <li>
-                    <a href="{{ path('app_user_logout') }}" class="">Déconnexion</a>
-                </li>
-            {% endif %}
-        </ul>
-    </div>
-</nav>
-<div class="container">
-    {# affichage des messages flash #}
-    {% for type, messages in app.session.flashBag.all %}
-        {% for message in messages %}
-            {# pour la classe alert-danger du bootstrap #}
-            {% if type == 'error' %}
-                {% set type = 'danger' %}
-            {% endif %}
-            <div class="alert alert-{{ type }} mt-2">
-                {{ message|raw }}
-            </div>
+{#   --------------------------------------    Message danger / sucsess     ---------------------             #}
+
+    <div class="container">
+        {# affichage des messages flash #}
+        {% for type, messages in app.session.flashBag.all %}
+            {% for message in messages %}
+                {# pour la classe alert-danger du bootstrap #}
+                {% if type == 'error' %}
+                    {% set type = 'danger' %}
+                {% endif %}
+                <div class="alert alert-{{ type }} mt-2">
+                    {{ message|raw }}
+                </div>
+            {% endfor %}
         {% endfor %}
-    {% endfor %}
-    {% block body %}{% endblock %}
-</div>
-{% block javascripts %}
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-            crossorigin="anonymous"></script>
-    <script src="{{ asset('lib/bootstrap/bootstrap.min.js') }}"></script>
-{% endblock %}
-</body>
+        {% block body %}{% endblock %}
+    </div>
+
+{# ------------------------------------------- script  --------------------------------------------------------   #}
+
+        {% block javascripts %}
+            <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+                    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+                    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+                    crossorigin="anonymous"></script>
+            <script src="{{ asset('lib/bootstrap/bootstrap.min.js') }}"></script>
+        {% endblock %}
+    </body>
 </html>

@@ -1,0 +1,52 @@
+
+.navbar{
+    height: 10vh;
+    position: fixed;
+    width: 100%;
+
+}
+.nav-link {
+    color: white;
+}
+
+.bg-light{
+    opacity: 80%;
+}
+
+/* test */
+
+.container-fluid{
+    margin: 0;
+    padding: 0;
+}
+
+
+.bandovideo {
+
+    height: 30vh;
+    background: #5eb5e0;
+    border: black solid 2px;
+
+}
+
+
+.search {
+    background: #ba8b00;
+    height: 40vh;
+    width: 40%;
+    border: black 2px solid;
+}
+
+.test{
+    background: #ba8b00;
+    height: 40vh;
+    width: 60%;
+    border: black 2px solid;
+}
+.testcards{
+    background:gold;
+    height:60vh;
+    width:100%;
+    border: black 2px solid;
+
+}
