@@ -21,7 +21,6 @@ class TypehebergementController extends AbstractController
     {
 
         $hebergements = $repository->findAll();
-        dump($hebergements);
 
         return $this->render('typehebergement/index.html.twig',
          [
