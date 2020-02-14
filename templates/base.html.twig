@@ -7,11 +7,39 @@
 <body>
 <nav>
     <div>
-        <a href="{{ path('app_index_index') }}" class="navbar-brand mb-0 h1">
+        <a href="{{ path('app_index_index') }}" class="">
             Voyage Interstellaire
         </a>
 
         {{ render(controller('App\\Controller\\DestinationController::menu')) }}
+
+
+       <!-- <video autoplay muted loop id="myVideo">
+            <source src="asset/myvideo.mp4" type="video/mp4">
+        </video>-->
+
+        <ul>
+
+            {% if app.user is null%}
+                <li>
+                    <a href="{{ path('app_user_register') }}" class="">Inscription
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ path('app_user_login') }}" class="">Connexion</a>
+                </li>
+            {% else %}
+                <li class="">
+                <span>
+                        {{ app.user }}
+                    </span>
+                </li>
+                <li>
+                    <a href="{{ path('app_user_logout') }}" class="">Déconnexion</a>
+                </li>
+            {% endif %}
+        </ul>
+        {% block body %}{% endblock %}
     </div>
 </nav>
 

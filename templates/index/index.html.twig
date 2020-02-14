@@ -1,1 +1,117 @@
 {% extends 'base.html.twig' %}
+{% block body %}
+    <h1>Bienvenue sur Space Odyssey</h1>
+
+
+    <h2>Destinations</h2>
+
+    <table>
+        <tr>
+            <th>Nom destination</th>
+        {% for destination in destinations %}
+        <tr>
+            <td>{{ destination.nom }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+
+    <h2>Séjours</h2>
+
+    <table>
+        <tr>
+            <th>Titre Sejour</th>
+            <th>Description</th>
+            <th>Duree</th>
+        {% for sejour in sejours %}
+        <tr>
+            <td>{{ sejour.titre }}</td>
+            <td>{{ sejour.description }}</td>
+            <td>{{ sejour.duree }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <br>
+    <br>
+
+    <h2>Type d'hébergement</h2>
+
+    <table>
+        <tr>
+            <th>Nom Type d'hébergement</th>
+        {% for typehebergement in typehebergements %}
+        <tr>
+            <td>{{ typehebergement.nom }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <br>
+    <br>
+
+    <h2>Users</h2>
+
+    <table>
+        <tr>
+            <th>Civilité</th>
+            <th>Nom</th>
+            <th>Prenom</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th>Role</th>
+            <th>Adresse</th>
+            <th>Code Postal</th>
+            <th>Ville</th>
+            <th>Pays</th>
+
+        {% for user in users %}
+        <tr>
+            <td>{{ user.civilite }}</td>
+            <td>{{ user.nom }}</td>
+            <td>{{ user.prenom }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.password }}</td>
+            <td>{{ user.role }}</td>
+            <td>{{ user.adresse }}</td>
+            <td>{{ user.codepostal }}</td>
+            <td>{{ user.ville }}</td>
+            <td>{{ user.pays }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <br>
+    <br>
+
+    <h2>Commandes</h2>
+
+    <table>
+        <tr>
+            <th>Id Commande</th>
+            {#<th>Id User</th>
+            <th>Id Sejour</th>
+            <th>Id Type d'hébergement</th>#}
+            <th>Nombre de personne</th>
+            <th>Prix final</th>
+            <th>Date commande</th>
+
+        {% for commande in commandes %}
+        <tr>
+            <td>{{ commande.id }}</td>
+            {#<td>{{ commande.user}}</td>
+            <td>{{ commande.sejour }}</td>
+            <td>{{ commande.typeHebergement }}</td>#}
+            <td>{{ commande.nbrePersonne }}</td>
+            <td>{{ commande.prixFinal }}</td>
+            <td>{{ commande.dateCommande|date('d/m/Y') }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <br>
+    <br>
+
+
+
+{% endblock %}
