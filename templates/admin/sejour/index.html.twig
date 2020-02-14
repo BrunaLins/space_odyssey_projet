@@ -1,0 +1,43 @@
+{% extends 'baseadmin.html.twig' %}
+
+{%  block body %}
+    <h1>Gestion Sejours</h1>
+
+
+
+    <table class="table">
+        <tr class="table-dark">
+            <th>Id</th>
+            <th>Titre</th>
+            <th>Description</th>
+            <th>Durée</th>
+            <th>Date Départ</th>
+            <th>Nombre de places restantes</th>
+            <th>Prix sejour</th>
+            <th width="250px"></th>
+        </tr>
+        {% for sejour in sejours %}
+            <tr>
+                <td>{{ sejour.id }} </td>
+                <td>{{ sejour.titre }}</td>
+                <td>{{ sejour.description }}</td>
+                <td>{{ sejour.duree }}</td>
+                <td>{{ sejour.moisDepart|date('d/m/Y H:i') }}</td>
+                <td>{{ sejour.stock }}</td>
+                <td>{{ sejour.prixSejour }}</td>
+                <td>
+                    <a href="{{ path('app_admin_sejour_edit', {'id': sejour.id}) }}" class="btn btn-primary">
+                        Modifier
+                    </a>
+                    <a href="{{ path('app_admin_sejour_edit', {'id': sejour.id}) }}" class="btn btn-danger">
+                        Supprimer
+                    </a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6" class="text-center">Aucun séjour</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

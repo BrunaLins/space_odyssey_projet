@@ -5,9 +5,8 @@
     <ul class="navbar-nav">
         {% for destination in destinations %}
             <li class="nav-item">
-                <a class="nav-link">
-                    {{ destination.nom }}
-                </a>
+                <a class="nav-link" href="{{ path('app_admin_sejour_index') }}">{{ destination.nom }} </a>
+
             </li>
         {% endfor %}
 
