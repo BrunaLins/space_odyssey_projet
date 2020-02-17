@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <h1>Edition Séjour</h1>
+
+    {{ form_start(form) }}
+
+    {{ form_row(form.titre) }}
+
+    {{ form_row(form.destination) }}
+
+    {{ form_row(form.typeHebergement) }}
+
+    {{ form_row(form.description) }}
+
+    {{ form_row(form.duree) }}
+
+    {{ form_row(form.image_1) }}
+
+    {{ form_row(form.stock) }}
+
+    {{ form_row(form.prixSejour) }}
+
+    <div class="text-right">
+        <button type="submit" class="btn btn-primary">
+            Enregistrer
+        </button>
+        <a href="{{ path('app_admin_sejour_index') }}" class="btn btn-outline-secondary">
+            Retour
+        </a>
+    </div>
+
+    {{ form_end(form) }}
+
+{% endblock %}
+
+

@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{%  block body %}
+    <br>
+    <h2>Gestion Sejours</h2>
+    <br>
+
+   <a href="{{ path('app_admin_sejour_edit') }}" class="btn btn-outline-secondary mb-3">
+        Créer un séjour
+    </a>
+
+    <table class="table">
+        <tr class="table-dark">
+            <th>Id</th>
+            <th>Titre</th>
+            <th>Description</th>
+            <th>Durée</th>
+            <th>Date Départ</th>
+            <th>Nombre de places restantes</th>
+            <th>Prix sejour</th>
+            <th width="250px"></th>
+        </tr>
+        {% for sejour in sejours %}
+            <tr>
+                <td>{{ sejour.id }} </td>
+                <td>{{ sejour.titre }}</td>
+                <td>{{ sejour.description }}</td>
+                <td>{{ sejour.duree }}</td>
+                <td>{{ sejour.moisDepart|date('d/m/Y H:i') }}</td>
+                <td>{{ sejour.stock }}</td>
+                <td>{{ sejour.prixSejour }}</td>
+                <td>
+                    <a href="{{ path('app_admin_sejour_edit', {'id': sejour.id}) }}" class="btn btn-secondary">
+                        Modifier
+                    </a>
+                    <a href="{{ path('app_admin_sejour_delete', {'id': sejour.id}) }}" class="btn btn-danger">
+                        Supprimer
+                    </a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6" class="text-center">Aucun séjour</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

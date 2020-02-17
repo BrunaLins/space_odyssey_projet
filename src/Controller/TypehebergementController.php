@@ -20,7 +20,7 @@ class TypehebergementController extends AbstractController
     public function index(TypeHebergementRepository $repository)
     {
 
-        $hebergements = $repository->findAll();
+        $typehebergements = $repository->findAll();
 
         return $this->render('typehebergement/index.html.twig',
          [

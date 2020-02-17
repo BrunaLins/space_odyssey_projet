@@ -3,9 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Destination;
+use App\Entity\Search;
+use App\Form\SearchType;
 use App\Repository\DestinationRepository;
 use App\Repository\SejourRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -35,4 +38,5 @@ class DestinationController extends AbstractController
             ['destinations' => $destinations]
         );
     }
+
 }

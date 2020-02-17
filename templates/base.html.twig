@@ -2,84 +2,169 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Voyage Interstellaire{% endblock %}</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-          crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ asset('asset/css/spaceodyssey.css') }}">
+    <title>{% block title %}Space Odyssey{% endblock %}</title>
+    {% block stylesheets %}
+{#        <link rel="stylesheet" href="{{ asset('asset/bootstrap/bootstrap.min.css') }}">#}
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+              rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+              crossorigin="anonymous">
+        <link rel="stylesheet" href="{{ asset('asset/css/spaceodyssey.css') }}">
+    {% endblock %}
 </head>
 <body>
 
-{#    ----------------------------------  NAVBAR  ----------------------------------------- #}
-<div class="container-fluid">
+{# --------------------------------------- ADMIN NAV  --------------------------------------------- #}
 
-
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-light ">
-        <a class="navbar-brand" href="{{ path('app_index_index') }}">Space Odyssey</a>
-
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
-                aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-
+{% if is_granted("ROLE_ADMIN") %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
+        <div class="container">
+                <span class="navbar-brand mb-0 h1">
+                    Admin
+                </span>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarAdmin" aria-controls="navbarAdmin" aria-expanded="false">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarAdmin">
+                <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Stations Spatiale</a>
+                        <a class="nav-link" href="{{ path('app_admin_sejour_index') }}">
+                            Gestion Séjours
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Lune</a>
+                        <a class="nav-link" href="{{ path('app_admin_hebergement_index') }}">
+                            Gestion Hébergements
+                        </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Mars</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Proxima Centauri</a>
-                    </li>
-
-{#             ---------------  connexion deconnexion nom user  -----------------------------#}
-                    {% if app.user is null%}
-                        <li>
-                            <a href="{{ path('app_user_register') }}" class="nav-link ">Inscription</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ path('app_user_login') }}" class="nav-link ">Connexion</a>
-                        </li>
-                    {% else %}
-                        <li class="">
-                            <span>{{ app.user }}</span>
-                        </li>
-                        <li>
-                            <a href="{{ path('app_user_logout') }}" class="nav-link float-right">Déconnexion</a>
-                        </li>
-                    {% endif %}
-            </ul>
+                </ul>
+            </div>
         </div>
     </nav>
+{% endif %}
+
+{#    ----------------------------------  NAVBAR  ----------------------------------------- #}
+        <header>
+            <!-- nav ok voir avec julien pour burger -->
+            <div class="navbar_odyssey">
+                <nav>
+                    <div class="toggle"><i class="fas fa-bars menu"></i></div>
+                    <ul class="ulmenu">
+                        <li>
+                            <a href="{{ path('app_index_index') }}">Space Odyssey</a>
+                        </li>
+                        <li>
+                            <a href="">Station </a>
+                        </li>
+                        <li>
+                            <a href="">Lune</a>
+                        </li>
+                        <li>
+                            <a href="">Mars</a>
+                        </li>
+                        <li>
+                            <a href="">Alpha Centori</a>
+                        </li>
+                        <li>
+                            <a href=""><i class="fas fa-users"></i> Compte</a>
+                        </li>
+                        <li>
+                            <a href=""><i class="fas fa-shopping-cart"></i></a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+{#             ---------------  connexion deconnexion nom user  -----------------------------#}
+{#                    {% if app.user is null%}#}
+{#                        <li>#}
+{#                            <a href="{{ path('app_user_register') }}" class="nav-link ">Inscription</a>#}
+{#                        </li>#}
+{#                        <li class="nav-item">#}
+{#                            <a href="{{ path('app_user_login') }}" class="nav-link ">Connexion</a>#}
+{#                        </li>#}
+{#                    {% else %}#}
+{#                        <li class="">#}
+{#                            <span>{{ app.user }}</span>#}
+{#                        </li>#}
+{#                        <li>#}
+{#                            <a href="{{ path('app_user_logout') }}" class="nav-link float-right">Déconnexion</a>#}
+{#                        </li>#}
+{#                    {% endif %}#}
+
+{#        <!-- ------------------------- bando video ---------------- -->#}
+
+
+        <div class="bg__video">
+
+            <video class="banner__video"
+                   src="{{ asset('asset/video/HASSELL + EOC presents MARS HABITAT (1080p_25fps_H264-128kbit_AAC).mp4') }}" autoplay loop playsinline muted>
+                space odyssey
+            </video>
+        </div>
+
+{# -------------------------------------    recherche      ------------------------------------------------------ #}
+<div class="container containerGlob">
+
+{{ form_start(form) }}
+    <div class="separation containerForm ">
+            {{ form_row(form.destination) }}
+            {{ form_row(form.typeHebergement) }}
+            <button type="submit" name="recherche"><i class="fas fa-search"></i>
+            Je recherche
+            </button>
+    </div>
+{{ form_end(form) }}
 </div>
-{#  ---------------------------------------------------------------------------------------  #}
-
-{#        <a href="{{ path('app_index_index') }}" class="">#}
-{#            Voyage Interstellaire#}
-{#        </a>#}
-
-{#        {{ render(controller('App\\Controller\\DestinationController::menu')) }}#}
 
 
-        <!-- <video autoplay muted loop id="myVideo">
-             <source src="asset/myvideo.mp4" type="video/mp4">
-         </video>-->
 
 
-{#   --------------------------------------    Message danger / sucsess     ---------------------             #}
+{#        <div class="separation">#}
+{#            <div class="containerGlob ">#}
+{#                {{ form_start(form) }}#}
+{#                    <div class="containerForm">#}
+{#                        {{ form_row(form.destination) }}#}
+{#                        {{ form_row(form.typeHebergement) }}#}
+{#                        <button type="submit" name="recherche"><i class="fas fa-search"></i> Je recherche</button>#}
+{#                    </div>#}
+{#                {{ form_end(form) }}#}
+{#            </div>#}
+
+{#        </div>#}
+{# Creation du formulaire#}
+
+{#  <div class="jumbotron bg-dark" style="color: white">#}
+{#      <h4 class="text-center">Votre recherche</h4>#}
+{#      <div class="container">#}
+
+{#          <div class="row">#}
+{#              <div class="col">#}
+
+{#              </div>#}
+{#              <div class="col">#}
+
+{#              </div>#}
+{#              <div class="col">#}
+{#                  <button class="btn btn-info">Rechercher</button>#}
+{#              </div>#}
+{#          </div>#}
+
+
+
+{#      </div>#}
+{#  </div>#}
+{# Fin Creation du formulaire#}
+{% block body %}
+
+
+        {#   --------------------------------------    Message danger / sucsess     ---------------------             #}
 
     <div class="container">
-        {# affichage des messages flash #}
+         affichage des messages flash
         {% for type, messages in app.session.flashBag.all %}
             {% for message in messages %}
-                {# pour la classe alert-danger du bootstrap #}
+                 pour la classe alert-danger du bootstrap
                 {% if type == 'error' %}
                     {% set type = 'danger' %}
                 {% endif %}
@@ -88,10 +173,117 @@
                 </div>
             {% endfor %}
         {% endfor %}
-        {% block body %}{% endblock %}
-    </div>
 
-{# ------------------------------------------- script  --------------------------------------------------------   #}
+    </div>
+{% endblock %}
+{#   -----------------------------------------------   footer   ----------------------------------------------------     #}
+        <footer class="footer_bg">
+            <div class="container flex__around" >
+
+                <div>abonnement new letter</div>
+                <div>appeller nous</div>
+                <div>reseau sociaux</div>
+
+            </div>
+
+            <div class="container flex__around">
+                <div>
+                    <h3>A PROPOS DE NOUS</h3>
+                    <ul>
+                        <li>
+                            <a href="">Qui sommes-nous</a>
+                        </li>
+                        <li>
+                            <a href="">Nos agences</a>
+                        </li>
+                        <li>
+                            <a href="">Space Odyssey recrute</a>
+                        </li>
+                        <li>
+                            <a href="">Magazine</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3>TOP TREKS</h3>
+                    <ul>
+                        <li>
+                            <a href="">Trek Martien</a>
+                        </li>
+                        <li>
+                            <a href="">Trek Alpha Centauri</a>
+                        </li>
+                        <li>
+                            <a href="">Trek Lunaire</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3>TOP RANDONNEES</h3>
+                    <ul>
+                        <li>
+                            <a href="">Randonnées Martien</a>
+                        </li>
+                        <li>
+                            <a href="">Randonnées Alpha Centauri</a>
+                        </li>
+                        <li>
+                            <a href="">Randonnées Lunaire</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3>INFOS PRATIQUES</h3>
+                    <ul>
+                        <li>
+                            <a href="">Nos partenaires</a>
+                        </li>
+                        <li>
+                            <a href="">FAQ / Vos questions</a>
+                        </li>
+                        <li>
+                            <a href="">Santé en voyage</a>
+                        </li>
+                        <li>
+                            <a href="">Nos événements</a>
+                        </li>
+                        <li>
+                            <a href="">Nos assurances</a>
+                        </li>
+                        <li>
+                            <a href="">Newsletter</a>
+                        </li>
+                        <li>
+                            <a href="">Nous contacter</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3>TYPE DE VOYAGE</h3>
+                    <ul>
+                        <li>
+                            <a href="">Voyages en groupe</a>
+                        </li>
+                        <li>
+                            <a href="">Voyages en individuel</a>
+                        </li>
+                        <li>
+                            <a href="">Voyages famille</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+
+
+
+
+
+        {# ------------------------------------------- script  --------------------------------------------------------   #}
 
         {% block javascripts %}
             <script src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -99,7 +291,8 @@
             <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
                     integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
                     crossorigin="anonymous"></script>
-            <script src="{{ asset('lib/bootstrap/bootstrap.min.js') }}"></script>
+            <script src="https://kit.fontawesome.com/8dac1fed2d.js" crossorigin="anonymous"></script>
+{#            <script src="{{ asset('lib/bootstrap/bootstrap.min.js') }}"></script>#}
         {% endblock %}
     </body>
 </html>

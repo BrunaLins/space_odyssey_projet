@@ -38,10 +38,16 @@ class TypeHebergement
      */
     private $commandes;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Hebergement", mappedBy="type_hebergement")
+     */
+    private $hebergements;
+
     public function __construct()
     {
         $this->sejours = new ArrayCollection();
         $this->commandes = new ArrayCollection();
+        $this->hebergements = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -129,6 +135,37 @@ class TypeHebergement
             // set the owning side to null (unless already changed)
             if ($commande->getTypeHebergement() === $this) {
                 $commande->setTypeHebergement(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Hebergement[]
+     */
+    public function getHebergements(): Collection
+    {
+        return $this->hebergements;
+    }
+
+    public function addHebergement(Hebergement $hebergement): self
+    {
+        if (!$this->hebergements->contains($hebergement)) {
+            $this->hebergements[] = $hebergement;
+            $hebergement->setTypeHebergement($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHebergement(Hebergement $hebergement): self
+    {
+        if ($this->hebergements->contains($hebergement)) {
+            $this->hebergements->removeElement($hebergement);
+            // set the owning side to null (unless already changed)
+            if ($hebergement->getTypeHebergement() === $this) {
+                $hebergement->setTypeHebergement(null);
             }
         }
 
