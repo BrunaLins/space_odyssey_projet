@@ -20,7 +20,7 @@ class HebergementType extends AbstractType
                 TextType::class,
                 ['label' => 'Nom']
             )
-            ->add('destination',
+           ->add('destination',
                 EntityType::class,
                 ['label' => 'Destination',
                     'class' => Destination::class,

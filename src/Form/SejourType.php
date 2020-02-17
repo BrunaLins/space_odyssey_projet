@@ -3,11 +3,14 @@
 namespace App\Form;
 
 use App\Entity\Destination;
+use App\Entity\Duree;
 use App\Entity\Sejour;
 use App\Entity\TypeHebergement;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -37,30 +40,29 @@ class SejourType extends AbstractType
                     'placeholder' => 'Choisissez un type d\'hébergement'
                 ]
             )
-            ->add('titre',
-                TextType::class,
-                ['label' => 'Titre']
+            ->add('dureedata',
+                EntityType::class,
+                ['label' => 'Durée',
+                    'class' => Duree::class,
+                    'choice_label' => 'nom',
+                    'placeholder' => 'Choisissez une durée'
+                ]
             )
             ->add('description',
-                TextType::class,
+                TextareaType::class,
                 ['label' => 'Description']
             )
-            ->add('duree',
-                IntegerType::class,
-                ['label' => 'Durée']
-                // TODO : A faire en liste deroulante
-            )
             ->add('image_1',
-                TextType::class,
+                FileType::class,
                 ['label' => 'Image 1']
             )
             ->add('stock',
                 IntegerType::class,
                 ['label' => 'Nombre de places restantes']
             )
-            ->add('prixSejour',
+            ->add('promo',
                 IntegerType::class,
-                ['label' => 'Prix séjour']
+                ['label' => 'Promo']
             )
         ;
     }

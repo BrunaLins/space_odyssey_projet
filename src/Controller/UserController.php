@@ -24,6 +24,7 @@ class UserController extends AbstractController
     )
     {
         $user = new User();
+        $user->setPremium(0); // on set le nouveau user en non premium
         $form = $this->createForm(RegistrationType::class, $user);
 
         $form->handleRequest($request);

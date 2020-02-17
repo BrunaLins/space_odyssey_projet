@@ -93,6 +93,11 @@ class User implements UserInterface, \Serializable
      */
     private $comments;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $premium;
+
     public function __construct()
     {
         $this->commandes = new ArrayCollection();
@@ -380,5 +385,17 @@ class User implements UserInterface, \Serializable
             $this->pays
             ) = unserialize($serialized);
 
+    }
+
+    public function getPremium(): ?bool
+    {
+        return $this->premium;
+    }
+
+    public function setPremium(bool $premium): self
+    {
+        $this->premium = $premium;
+
+        return $this;
     }
 }

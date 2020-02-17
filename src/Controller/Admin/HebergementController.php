@@ -28,6 +28,7 @@ class HebergementController extends AbstractController
     {
         $hebergements = $repository->findBy(
             [], ['id'=>'ASC']);
+        dump($hebergements);
 
         return $this->render(
             'admin/hebergement/index.html.twig',

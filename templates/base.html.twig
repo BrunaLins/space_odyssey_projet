@@ -21,7 +21,8 @@
                 <span class="navbar-brand mb-0 h1">
                     Admin
                 </span>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarAdmin" aria-controls="navbarAdmin" aria-expanded="false">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarAdmin"
+                    aria-controls="navbarAdmin" aria-expanded="false">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarAdmin">
@@ -36,11 +37,35 @@
                             Gestion Hébergements
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_admin_user_index') }}">
+                            Gestion Users
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
 {% endif %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a href="{{ path('app_index_index') }}" class="navbar-brand mb-0 h1">
+            {% if app.user is null %}
+                Space Odyssey
+            {% else %}
+                {% if (app.user.premium) %}
+                    <span style="color: gold">  Space Odyssey Premium  </span>
+                {% else %}
+                    Space Odyssey
+                {% endif %}
+            {% endif %}
+        </a>
+
+        {{ render(controller('App\\Controller\\DestinationController::menu')) }}
+
+        <!-- <video autoplay muted loop id="myVideo">
+             <source src="asset/myvideo.mp4" type="video/mp4">
+         </video>-->
 
 {#    ----------------------------------  NAVBAR  ----------------------------------------- #}
         <header>
@@ -113,6 +138,27 @@
             <button type="submit" name="recherche"><i class="fas fa-search"></i>
             Je recherche
             </button>
+        <ul>
+
+            {% if app.user is null %}
+                <li>
+                    <a href="{{ path('app_user_register') }}" class="">Inscription
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ path('app_user_login') }}" class="">Connexion</a>
+                </li>
+            {% else %}
+                <li class="">
+                    {% if (app.user.premium) %}
+                        <span style="color: gold">  {{ app.user }} </span>
+                    {% endif %}
+                </li>
+                <li>
+                    <a href="{{ path('app_user_logout') }}" class="">Déconnexion</a>
+                </li>
+            {% endif %}
+        </ul>
     </div>
 {{ form_end(form) }}
 </div>

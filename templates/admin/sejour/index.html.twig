@@ -16,8 +16,8 @@
             <th>Description</th>
             <th>Durée</th>
             <th>Date Départ</th>
-            <th>Nombre de places restantes</th>
-            <th>Prix sejour</th>
+            <th>Places restantes</th>
+            <th>Promo</th>
             <th width="250px"></th>
         </tr>
         {% for sejour in sejours %}
@@ -25,10 +25,10 @@
                 <td>{{ sejour.id }} </td>
                 <td>{{ sejour.titre }}</td>
                 <td>{{ sejour.description }}</td>
-                <td>{{ sejour.duree }}</td>
+                <td>{{ sejour.dureedata }}</td>
                 <td>{{ sejour.moisDepart|date('d/m/Y H:i') }}</td>
                 <td>{{ sejour.stock }}</td>
-                <td>{{ sejour.prixSejour }}</td>
+                <td>{{ sejour.promo }}</td>
                 <td>
                     <a href="{{ path('app_admin_sejour_edit', {'id': sejour.id}) }}" class="btn btn-secondary">
                         Modifier

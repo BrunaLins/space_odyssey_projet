@@ -6,6 +6,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
@@ -42,6 +43,8 @@ class Sejour
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
+     * @Assert\Image(mimeTypesMessage="Le fichier doit être une image", maxSize="5M", maxSizeMessage="L'image be doit pas dépasser 5Mo")
      */
     private $image_1;
 
@@ -87,11 +90,24 @@ class Sejour
      */
     private $comments;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Duree", inversedBy="sejours")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $dureedata;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $promo;
+
     public function __construct()
     {
         $this->commandes = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->mois_depart = new \DateTime();
+        $this->duree = 0; // en attente de suppression
+        $this->prix_sejour = 0; // en attente de suppression
     }
 
     public function getId(): ?int
@@ -147,12 +163,12 @@ class Sejour
         return $this;
     }
 
-    public function getImage1(): ?string
+    public function getImage1()
     {
         return $this->image_1;
     }
 
-    public function setImage1(string $image_1): self
+    public function setImage1($image_1): self
     {
         $this->image_1 = $image_1;
 
@@ -289,6 +305,30 @@ class Sejour
                 $comment->setSejour(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDureedata(): ?Duree
+    {
+        return $this->dureedata;
+    }
+
+    public function setDureedata(?Duree $dureedata): self
+    {
+        $this->dureedata = $dureedata;
+
+        return $this;
+    }
+
+    public function getPromo(): ?int
+    {
+        return $this->promo;
+    }
+
+    public function setPromo(?int $promo): self
+    {
+        $this->promo = $promo;
 
         return $this;
     }

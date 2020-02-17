@@ -2,19 +2,17 @@
 
 
 {% block body %}
-    <h1>Edition Hébergement</h1>
+    <h1>Edition User</h1>
 
     {{ form_start(form) }}
 
-    {{ form_row(form.nom) }}
-   {{ form_row(form.destination) }}
-    {{ form_row(form.typeHebergement) }}
+    {{ form_row(form.premium) }}
 
     <div class="text-right">
         <button type="submit" class="btn btn-primary">
             Enregistrer
         </button>
-        <a href="{{ path('app_admin_hebergement_index') }}" class="btn btn-outline-secondary">
+        <a href="{{ path('app_admin_user_index') }}" class="btn btn-outline-secondary">
             Retour
         </a>
     </div>

@@ -14,16 +14,16 @@
         <tr class="table-dark">
             <th>Id</th>
             <th>Nom</th>
-            <th>Destination Id</th>
-            <th>Type Hebergement Id</th>
+            <th>Destination</th>
+            <th>Type Hebergement</th>
             <th width="250px"></th>
         </tr>
         {% for hebergement in hebergements %}
             <tr>
                 <td>{{ hebergement.id }} </td>
                 <td>{{ hebergement.nom }}</td>
-               <td>{# {{ hebergement.destination }} #}</td>
-                <td>{# {{ hebergement.typeHebergement }} #}</td>
+               <td>{{ hebergement.destination }} </td>
+                <td> {{ hebergement.typeHebergement }} </td>
                 <td>
                     <a href="{{ path('app_admin_hebergement_edit', {'id': hebergement.id}) }}" class="btn btn-secondary">
                         Modifier
