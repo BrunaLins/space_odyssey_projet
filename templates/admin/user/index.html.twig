@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{%  block body %}
+    <br>
+    <h2>Gestion Users</h2>
+    <br>
+
+ {#   <a href="{{ path('app_admin_sejour_edit') }}" class="btn btn-outline-secondary mb-3">
+        Créer un user
+    </a>#}
+
+    <table class="table">
+        <tr class="table-dark">
+            <th>Id</th>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Premium</th>
+            <th>Modif Premium</th>
+            <th width="250px"></th>
+        </tr>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }} </td>
+                <td>{{ user.nom }}</td>
+                <td>{{ user.prenom }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.role }}</td>
+                <td>{{ user.premium }}</td>
+                <td>
+                   {# {{ form_start(form) }}
+                    {{ form_row(form.premium) }}
+                    {{ form_end(form) }}#}
+                </td>
+                <td>
+                    <a href="{{ path('app_admin_user_edit', {'id': user.id}) }}" class="btn btn-secondary">
+                        Modifier
+                    </a>
+                    <a href="{{ path('app_admin_user_index', {'id': user.id}) }}" class="btn btn-danger">
+                        Supprimer
+                    </a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6" class="text-center">Aucun user</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

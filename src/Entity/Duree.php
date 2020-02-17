@@ -7,9 +7,9 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\DestinationRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\DureeRepository")
  */
-class Destination
+class Duree
 {
     /**
      * @ORM\Id()
@@ -24,19 +24,18 @@ class Destination
     private $nom;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Sejour", mappedBy="destination")
+     * @ORM\Column(type="integer")
      */
-    private $sejours;
+    private $nbre_jours;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Hebergement", mappedBy="destination")
+     * @ORM\OneToMany(targetEntity="App\Entity\Sejour", mappedBy="dureedata")
      */
-    private $hebergements;
+    private $sejours;
 
     public function __construct()
     {
         $this->sejours = new ArrayCollection();
-        $this->hebergements = new ArrayCollection();
     }
 
     public function __toString()
@@ -61,6 +60,18 @@ class Destination
         return $this;
     }
 
+    public function getNbreJours(): ?int
+    {
+        return $this->nbre_jours;
+    }
+
+    public function setNbreJours(int $nbre_jours): self
+    {
+        $this->nbre_jours = $nbre_jours;
+
+        return $this;
+    }
+
     /**
      * @return Collection|Sejour[]
      */
@@ -73,7 +84,7 @@ class Destination
     {
         if (!$this->sejours->contains($sejour)) {
             $this->sejours[] = $sejour;
-            $sejour->setDestination($this);
+            $sejour->setDureedata($this);
         }
 
         return $this;
@@ -84,39 +95,8 @@ class Destination
         if ($this->sejours->contains($sejour)) {
             $this->sejours->removeElement($sejour);
             // set the owning side to null (unless already changed)
-            if ($sejour->getDestination() === $this) {
-                $sejour->setDestination(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Hebergement[]
-     */
-    public function getHebergements(): Collection
-    {
-        return $this->hebergements;
-    }
-
-    public function addHebergement(Hebergement $hebergement): self
-    {
-        if (!$this->hebergements->contains($hebergement)) {
-            $this->hebergements[] = $hebergement;
-            $hebergement->setDestination($this);
-        }
-
-        return $this;
-    }
-
-    public function removeHebergement(Hebergement $hebergement): self
-    {
-        if ($this->hebergements->contains($hebergement)) {
-            $this->hebergements->removeElement($hebergement);
-            // set the owning side to null (unless already changed)
-            if ($hebergement->getDestination() === $this) {
-                $hebergement->setDestination(null);
+            if ($sejour->getDureedata() === $this) {
+                $sejour->setDureedata(null);
             }
         }
 
