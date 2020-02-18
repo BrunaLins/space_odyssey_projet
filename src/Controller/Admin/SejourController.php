@@ -6,6 +6,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Sejour;
 use App\Form\SejourType;
+use App\Repository\CommentRepository;
 use App\Repository\SejourRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -108,7 +109,8 @@ class SejourController extends AbstractController
 
         return $this->render(
             'admin/sejour/edit.html.twig',
-            ['form' => $form->createView()]
+            ['form' => $form->createView(),
+                'original_image1' => $originalImage1]
         );
     }
 
@@ -124,8 +126,6 @@ class SejourController extends AbstractController
 
         return $this->redirectToRoute('app_admin_sejour_index');
     }
-
-
 
 
 

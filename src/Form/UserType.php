@@ -15,14 +15,7 @@ class UserType extends AbstractType
     {
         $builder
             ->add('premium',
-                 ChoiceType::class,
-                [
-                    'label' => 'Premium',
-                    'choices' => [
-                    'Non' => '0',
-                    'Oui' => '1'
-                    ]
-                ]
+                 ChoiceType::class
             );
     }
 

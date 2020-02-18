@@ -101,6 +101,11 @@ class Sejour
      */
     private $promo;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $moyenne;
+
     public function __construct()
     {
         $this->commandes = new ArrayCollection();
@@ -331,5 +336,28 @@ class Sejour
         $this->promo = $promo;
 
         return $this;
+    }
+
+    public function getMoyenne(): ?int
+    {
+        return $this->moyenne;
+    }
+
+    public function setMoyenne(?int $moyenne): self
+    {
+        $this->moyenne = $moyenne;
+
+        return $this;
+    }
+
+    public function getNoteMoyenne()
+    {
+        $total = 0;
+
+        foreach ($this->getComments() as $comment) {
+            $total += $comment->getNote();
+        }
+
+        return $total / $this->getComments()->count();
     }
 }

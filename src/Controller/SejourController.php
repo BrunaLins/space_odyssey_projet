@@ -6,6 +6,7 @@ use App\Entity\Sejour;
 use App\Entity\Comment;
 use App\Form\CommentType;
 use App\Repository\CommentRepository;
+use App\Repository\SejourRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -58,6 +59,22 @@ public function index(Request $request, EntityManagerInterface $manager,
 
     );
 }
+
+    /**
+     * @param SejourRepository $repository
+     *
+     * @Route("/best")
+     */
+    public function best( SejourRepository $repository)
+
+    {
+        $sejours = $repository->getBest();
+        dump($sejours);
+
+
+        return $this->render('index/best.html.twig', ['sejours' => $sejours]);
+
+    }
 
 
 }

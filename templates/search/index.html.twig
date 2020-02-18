@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ parent() }} - Recherche
+{% endblock %}
+
+{% block body %}
+    <h1>Resultat de votre recherche</h1>
+
+    <ul>
+        {% for key in result %}
+            <li> titre --{{ key.titre }}</li>
+            <li>Détail --{{ key.description }}</li>
+            <li>Destination --{{ key.destination }}</li>
+            <li>Durée  --{{ key.dureedata }}</li>
+            {% if key.promo is null %}
+                <p>Pas de promo sur ce seéjour</p>
+            {% else %}
+                <li>promo  --{{ key.promo }} %</li>
+            {% endif %}
+            <li>Type Hébbergement  --{{ key.typehebergement}}</li>
+            <li>Prix séjour  --{{ key.prixsejour|number_format(2, ",", ".")}} €</li>
+            <li>Image  --{{ key.image1}}</li>
+            <li>Mois départ  --{{ key.moisdepart|date('d/m/Y')}}</li>
+
+        {% endfor %}
+    </ul>
+
+{% endblock %}

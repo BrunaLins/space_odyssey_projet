@@ -18,7 +18,7 @@ class Comment
     private $id;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text")Not
      *
      * @Assert\NotBlank(message="Votre commentaire est vide")
      */
@@ -42,6 +42,16 @@ class Comment
      * @ORM\JoinColumn(nullable=false)
      */
     private $sejour;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $publication_date;
+
+    public function __construct()
+    {
+        $this->publication_date = new \DateTime();
+    }
 
     public function getId(): ?int
     {
@@ -92,6 +102,18 @@ class Comment
     public function setSejour(?Sejour $sejour): self
     {
         $this->sejour = $sejour;
+
+        return $this;
+    }
+
+    public function getPublicationDate(): ?\DateTimeInterface
+    {
+        return $this->publication_date;
+    }
+
+    public function setPublicationDate(\DateTimeInterface $publication_date): self
+    {
+        $this->publication_date = $publication_date;
 
         return $this;
     }

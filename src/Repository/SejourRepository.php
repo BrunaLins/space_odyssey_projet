@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\Search;
+
 use App\Entity\Sejour;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
@@ -19,6 +19,19 @@ class SejourRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Sejour::class);
+    }
+
+    public function getBest()
+    {
+        $entityManager = $this->getEntityManager();
+        $rsm = new Query\ResultSetMapping();
+        $rsm->addScalarResult('id', 'id');
+        $rsm->addScalarResult('titre', 'titre');
+        $rsm->addScalarResult('moyenne', 'moyenne');
+
+        $query = $entityManager->createNativeQuery('SELECT s.id, s.titre, AVG(c.note) as moyenne FROM sejour s, comment c WHERE s.id = c.sejour_id GROUP BY s.id ORDER BY AVG(c.note) DESC LIMIT 5', $rsm);
+
+        return $query->getArrayResult();
     }
 
     // /**
@@ -66,6 +79,12 @@ dump($search);
                 ->setParameter('destination', $search['destination'])
             ;
 
+        }
+
+        if (!empty($search['duree'])) {
+            $qb
+                ->andWhere('s.dureedata = :dureedata')
+                ->setParameter('dureedata', $search['duree']);
         }
 
         if (!empty($search['typeHebergement'])) {

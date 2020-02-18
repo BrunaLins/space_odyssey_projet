@@ -17,7 +17,7 @@
             <th>Email</th>
             <th>Role</th>
             <th>Premium</th>
-            <th>Modif Premium</th>
+            <th></th>
             <th width="250px"></th>
         </tr>
         {% for user in users %}
@@ -34,12 +34,15 @@
                     {{ form_end(form) }}#}
                 </td>
                 <td>
-                    <a href="{{ path('app_admin_user_edit', {'id': user.id}) }}" class="btn btn-secondary">
-                        Modifier
+                   {% if user.premium != 1 %}
+                    <a href="{{ path('app_admin_user_passepremium', {'id': user.id}) }}" class="btn btn-warning">
+                        Passer Premium
                     </a>
-                    <a href="{{ path('app_admin_user_index', {'id': user.id}) }}" class="btn btn-danger">
-                        Supprimer
-                    </a>
+                    {% else %}
+                        <a href="{{ path('app_admin_user_supprimepremium', {'id': user.id}) }}" class="btn btn-danger">
+                            Supprimer Premium
+                        </a>
+                    {% endif %}
                 </td>
             </tr>
         {% else %}

@@ -6,6 +6,7 @@ namespace App\Form;
 
 
 use App\Entity\Destination;
+use App\Entity\Duree;
 use App\Entity\Search;
 use App\Entity\TypeHebergement;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -21,16 +22,44 @@ class SearchType extends AbstractType
         $builder
             ->add('destination',
                 EntityType::class,
-                ['class'=>Destination::class,
+                [
+                    'class'=>Destination::class,
                     'choice_label'=>'getNom',
                     'placeholder'=>'Choisissez une catégorie',
+                    'required'=>false,
+//                    attr = attribut dans les balise html pour ajouter du syle css champ option
+//                    label_attr = changement css label crée une class css
+                    'attr' => [
+                        'class' => 'form_search'
+                    ],
+                    'label_attr' =>[
+                        'class' => 'label_search'
+                    ]
+                ]
+            )
+
+            ->add('duree',
+                EntityType::class,
+                ['class'=>Duree::class,
+                    'choice_label'=>'getNom',
+                    'placeholder'=>'Choisissez la durée du séjour',
                     'required'=>false])
+
+
 
             ->add('typeHebergement',EntityType::class,
                 ['class'=>TypeHebergement::class,
                     'choice_label'=>'getNom',
-                    'placeholder'=>'Choisissez votre héberment','required'=>false])
-        ;
+                    'placeholder'=>'Choisissez votre héberment',
+                    'required'=>false,
+                    'attr' => [
+                        'class' => 'form_search'
+                    ],
+                    'label_attr' =>[
+                        'class' => 'label_search'
+                    ]
+                ]
+            );
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -5,30 +5,51 @@
     <br>
     <br>
 
-    <table>
-        {% for sejour in sejours %}
-            <tr>
-                <td>
-                    {% if sejour.image1 is not null %}
-                        <div>
-                            <img src="{{ asset('images/' ~ sejour.image1) }}" width="20%">
-                        </div>
+    <div>
+        <table>
+            {% for sejour in sejours %}
+                <tr>
+                    <td>
+                        {% if sejour.image1 is not null %}
+                            <div>
+                                <img src="{{ asset('images/' ~ sejour.image1) }}" width="20%">
+                            </div>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    {% if sejour.promo %}
+                        <td style="color: red; font-size: 1.2rem;">Promo ! {{ sejour.titre }}</td>
+                    {% else %}
+                        <td style="font-size: 1.2rem;">{{ sejour.titre }}</td>
                     {% endif %}
-                </td>
-            </tr>
-        <tr>
-            {% if sejour.promo %}
-            <td style="color: red; font-size: 1.2rem;">Promo ! {{ sejour.titre }}</td>
-            {% else %}
-                <td style="font-size: 1.2rem;">{{ sejour.titre }}</td>
-            {% endif %}
-            <td>{{ sejour.description }}</td>
-            <td>{{ sejour.dureedata }}</td>
-        </tr>
+                    <td>{{ sejour.description }}</td>
+                    <td>{{ sejour.dureedata }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
 
+    <div class="list-group list-group-flush">
+        {% for sejour in best_sejours %}
+            <a class="list-group-item"
+               href="{{ path('app_sejour_index', {'id': sejour.id}) }}">
+                {{ sejour.titre }} :
+                {{ sejour.moyenne }}
+            </a><br>
+        {% else %}
+        {% endfor %}
+    </div>
+
+    <table>
+        {% for comment in comments %}
+            <tr>
+                <td>{{ comment.contenu }}</td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>{{ comment.note }}</td>
+            </tr>
         {% endfor %}
     </table>
-
 
 
 

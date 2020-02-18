@@ -54,7 +54,8 @@ class SejourType extends AbstractType
             )
             ->add('image_1',
                 FileType::class,
-                ['label' => 'Image 1']
+                ['label' => 'Image 1',
+                    'required' => false]
             )
             ->add('stock',
                 IntegerType::class,
@@ -62,7 +63,8 @@ class SejourType extends AbstractType
             )
             ->add('promo',
                 IntegerType::class,
-                ['label' => 'Promo']
+                ['label' => 'Promo',
+                    'required' => false]
             )
         ;
     }

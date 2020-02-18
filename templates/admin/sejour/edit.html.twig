@@ -16,6 +16,13 @@
 
     {{ form_row(form.description) }}
 
+    {% if original_image1 is not null %}
+        <p>
+            Image actuelle :
+            <img  src="{{ asset('images/' ~ original_image1) }}" height="200px">
+        </p>
+    {% endif %}
+
     {{ form_row(form.image_1) }}
 
     {{ form_row(form.stock) }}
@@ -32,6 +39,18 @@
     </div>
 
     {{ form_end(form) }}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent ()  }}
+    <script src = "https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            bsCustomFileInput.init()
+        });
+    </script>
+
 
 {% endblock %}
 

@@ -2,15 +2,17 @@
 
 namespace App\Controller;
 
-use App\Entity\Search;
+
 use App\Form\SearchType;
 use App\Repository\CommandeRepository;
+use App\Repository\CommentRepository;
 use App\Repository\DestinationRepository;
 use App\Repository\SejourRepository;
 use App\Repository\TypeHebergementRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class IndexController extends AbstractController
@@ -25,7 +27,10 @@ class IndexController extends AbstractController
         TypeHebergementRepository $repository3,
         UserRepository $repository4,
         CommandeRepository $repository5,
-        Request $request)
+        CommentRepository $repository6,
+        Request $request,
+        SessionInterface $session
+)
 
     {
         $destinations = $repository->findBy(
@@ -35,7 +40,8 @@ class IndexController extends AbstractController
 
         $sejours = $repository2->findBy(
             [],
-            ['id' => 'ASC']
+            ['id' => 'ASC'],
+            5
         );
 
         $typehebergements = $repository3->findBy(
@@ -53,16 +59,24 @@ class IndexController extends AbstractController
             ['id' => 'ASC']
         );
 
+        $comments = $repository6->findBy(
+            [],
+            ['note' => 'DESC'],
+            5
+        );
+
         // Formulaire de recherche
 
         $form = $this->createForm(SearchType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-            $result = $repository2->findAllTri($form->getData());
-
-            dump($result);
+            $session->set('search-data', $form->getData());
+            return $this->redirectToRoute('app_search_index');
+            //dump($result);
         }
+
+        $bestSejours = $repository2->getBest();
 
         //Fin Formulaire de recherche
 
@@ -74,7 +88,9 @@ class IndexController extends AbstractController
                 'typehebergements' => $typehebergements,
                 'users' => $users,
                 'commandes' => $commandes,
+                'comments' => $comments,
                 'form'=>$form->createView(),
+                'best_sejours' => $bestSejours
             ]);
     }
 

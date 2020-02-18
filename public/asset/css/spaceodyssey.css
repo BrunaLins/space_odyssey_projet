@@ -1,0 +1,531 @@
+* {
+    box-sizing: border-box;
+    outline: 0;
+
+}
+
+html {
+    font-family: sans-serif;
+    line-height: 1.15;
+}
+
+body {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    text-align: left;
+    background-color: rgb(251, 250, 248);
+}
+
+h2 {
+    margin: 0;
+}
+/* ----------------------container --------------------------------------------- */
+.container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+@media (min-width: 576px) {
+    .container {
+        max-width: 540px;
+    }
+}
+
+@media (min-width: 768px) {
+    .container {
+        max-width: 720px;
+    }
+}
+
+@media (min-width: 992px) {
+    .container {
+        max-width: 960px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1140px;
+    }
+}
+
+.flex_end{
+    display: flex;
+    justify-content: end;
+
+}
+
+.flex__btw{
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.flex__around{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+
+.container-fluid {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+@media (min-width: 576px) {
+    .container{
+        max-width: 540px;
+    }
+}
+
+@media (min-width: 768px) {
+    .container{
+        max-width: 720px;
+    }
+}
+
+@media (min-width: 992px) {
+    .container {
+        max-width: 960px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container{
+        max-width: 1140px;
+    }
+}
+
+/* -----------------------------------------------------navbar-------------------------------------- */
+
+
+
+nav {
+
+    position: fixed;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5) ;
+    box-shadow: black 0px 10px 50px;
+
+}
+nav>ul{
+    width: 80%;
+    margin: 0 auto;
+    padding: 0;
+}
+
+nav> ul li{
+    list-style: none;
+    display: inline-block;
+    padding: 20px;
+}
+nav> ul li:hover{
+
+    background: rgba(92, 90, 90, 0.7);
+    border-radius: 20px;
+}
+
+nav> ul li a {
+    color: #ced4da;
+    text-decoration: none;
+
+}
+
+.toggle{
+    width: 100%;
+    padding: 10px 20px;
+    background: #001f44;
+    text-align: right;
+    box-sizing: border-box;
+    color: #fff;
+    font-size: 30px;
+    display: none;
+}
+
+@media (max-width: 768px) {
+
+    .toggle{
+        display:block;
+    }
+    nav> ul{
+        width: 100%;
+        display: none;
+    }
+    nav> ul li{
+        display: block;
+        text-align: center;
+    }
+    .active{
+        display: block;
+    }
+}
+
+/* -------------    bandeau video    -------------------------------  */
+
+
+.banner__video {
+    /* border: hotpink 2px solid; */
+
+    width: 100%;
+    position: relative;
+
+    overflow: hidden;
+    background-color: black;
+
+}
+/* .bg__video{
+  background-color: black;
+} */
+
+video {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: auto;
+    height: auto;
+    z-index: -100;
+    transform: translateX(-50%);
+}
+
+/* ----------------------- container-card --------------------------------------------------- */
+
+.container-card{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    max-width: 80%;
+    margin: auto;
+    padding-top: 20px;
+
+}
+/* ------------------------  card --------------------------------------------------------- */
+.card {
+
+
+    background: white;
+    /* border: #1a252f 2px solid; */
+    width:380px;
+    height: 512px;
+    margin: 10px 2px 10px 2px;
+    border-radius: 10px;
+    box-shadow: black 2px 2px 10px;
+}
+
+.card figure > img {
+    width: 100%;
+}
+
+figure {
+
+    margin: 0;
+}
+
+/* .container div {
+  background: crimson;
+} */
+
+.card >figure> figcaption {
+    border: 2px #2c3e501f solid;
+    font-size: 1.5rem;
+    text-align: center;
+    border-radius: 10px 0px;
+    box-shadow: 1px 3px rgba(29, 28, 27, 0.05);
+}
+
+.card_sejour >p{
+    padding: 0 10px 0 10px;
+}
+.card_sejour >h2{
+    padding: 0 0 0 10px;
+}
+.card_sejour button{
+    margin-left: 250px;
+    margin-top: 10px;
+}
+
+
+
+/* ------------------------------------ formulaire recherche ------------------------------------- */
+
+.separation{
+
+    /*position:relative;*/
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    top: -85px;
+}
+.label_search{
+    margin-right:10px ;
+    margin-left: 10px;
+}
+.form_search{
+    border-radius: 4px;
+    background: rgba(33, 33, 27, 0.64);
+    color: white;
+}
+
+
+
+/*.containerGlob{*/
+
+/*    position: absolute;*/
+/*    left: 200px;*/
+/*    top: 200px;*/
+}
+.containerForm{
+    max-width: 75%;
+    /*left: 25%;*/
+    top:20%;
+    background-color: rgba(202, 197, 192, 0.5);
+    padding: 10px;
+    border-radius: 6px;
+
+}
+button[type=submit] {
+    background-color: #1b1a19;
+    color: white;
+    padding: 5px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    text-align: center;
+    margin: 0 10px 0 10px;
+}
+button[type=submit]:hover {
+    background-color: #f6dabdde;
+
+}
+.select_search{
+    text-align: center;
+    color: rgb(250, 250, 250);
+    border-radius: 5px;
+    border: black;
+    padding: 5px 0 5px 0;
+    margin: 2px;
+    background-color: rgba(29, 28, 27, 0.89);
+}
+/* ------------------------------- formulaire register ---------------- */
+
+.form_register{
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 5px;
+    margin-right: 0px;
+    margin-left: 0px;
+    resize: vertical;
+}
+.form_register_cadre{
+
+}
+.containerFormRegister {
+
+
+    max-width:100%;
+    /*left: 25%;*/
+    top: 20%;
+    background-color: rgba(202, 197, 192, 0.5);
+    padding: 30px;
+    border-radius: 6px;
+}
+.marginRegister {
+   margin-bottom: 20px;
+}
+
+/* ----------------------------- titre ---------------------------- */
+
+.titre h1 {
+    text-align: center;
+}
+
+.titre h3 {
+    text-align: center;
+}
+
+/* ------------------------------  banner bons_plan -------------------------------------------- */
+
+
+.bg__bonsplans{
+    background-color: rgba(255, 239, 213, 0.294);
+
+}
+/* ----------------------------------------------  carousel  commentaire  ---------------------------------------------- */
+.carou{
+    margin-top: 50px;
+}
+.carousel {
+    background: rgb(251, 250, 248);
+    text-align: center;
+    padding: 3em 0 2em 0;
+    max-width: 100%;
+    margin: auto;
+    position: relative;
+    overflow: hidden;
+}
+.carousel h2 {
+    margin: 0;
+    margin-top: -1.7em;
+    padding: 0;
+    font-size: 1.5em;
+    text-align: center;
+    color: #bbbbbb;
+}
+.carousel .slides {
+    width: 400%;
+    left: 0;
+    padding-left: 0;
+    padding-top: 1em;
+    overflow: hidden;
+    list-style: none;
+    position: relative;
+
+    -webkit-transition: transform .5s;
+    -moz-transition: transform .5s;
+    -o-transition: transform .5s;
+    transition: transform .5s;
+}
+.carousel .slides li {
+    width: 25%;
+    position: relative;
+    float: left;
+}
+.carousel li p{
+    margin-top: 0;
+}
+.carousel li q {
+    max-width: 90%;
+    margin: auto;
+    color: #666666;
+    font-size: 1.3em;
+    font-weight: bold;
+}
+.carousel li img {
+    width:3em;
+    border-radius: 50%;
+    margin-left: -1.5em;
+    margin-right: 0.5em;
+    vertical-align: middle;
+}
+.carousel li span.author {
+    margin-top:0.5em;
+    font-size: 1.2em;
+    color: #777777;
+    display: block;
+}
+.carousel .slidesNavigation {
+    display: block;
+    list-style: none;
+    text-align: center;
+    bottom: 1em;
+    position: absolute;
+    width: 104px;
+    left: 50%;
+    margin-left: -52px;
+}
+.carousel input {
+    display: none;
+}
+.carousel .slidesNavigation label {
+    float: left;
+    margin: 6px;
+    display: block;
+    height: 10px;
+    width: 10px;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    border: solid 2px #0a131a65;
+    font-size: 0;
+}
+
+#radio-1:checked ~ .slides {
+    transform: translateX(0%);
+}
+#radio-2:checked ~ .slides {
+    transform: translateX(-25%);
+}
+
+.carousel .slidesNavigation label:hover {
+    cursor: pointer;
+}
+
+.carousel #radio-1:checked ~ .slidesNavigation label#dotForRadio-1,
+.carousel #radio-2:checked ~ .slidesNavigation label#dotForRadio-2 {
+    background: #13191d83;
+}
+
+@media  (max-width: 796px) {
+    .carousel{
+        height: 8.5em;
+        display: none;
+    }
+}
+
+/* --------------------------------------  footer  ------------------------------------------------------------ */
+.footer_bg{
+    background-color: rgb(44, 35, 30);
+
+    list-style: none;
+
+}
+.footer_bg div ul>li{
+    list-style: none;
+    color: #bbbbbb;
+    text-align: center;
+
+}
+.footer_bg div>h3{
+    color: #bbbbbb;
+    text-align: center;
+}
+
+
+
+/* test */
+
+.cadre{
+    border: red 2px solid;
+}
+
+.test1{
+    border: 2px solid red;
+    background-color: brown;
+    height: 10vh;
+
+}
+.test2{
+    border: 2px solid rgb(0, 255, 34);
+    background-color: rgb(42, 165, 73);
+    height: 20vh;
+}
+.test3{
+    border: 2px solid rgb(68, 0, 255);
+    background-color: rgb(89, 42, 165);
+    height: 20vh;
+}
+/* -----------------------  sejour ----------------------------------------- */
+.sejour{
+    margin-bottom: 20px ;
+
+    border-radius: 12px;
+    box-shadow: black 2px 2px 12px;
+}
+.sejour button{
+    margin-bottom: 5px ;
+}

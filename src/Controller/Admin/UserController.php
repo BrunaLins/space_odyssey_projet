@@ -39,40 +39,28 @@ class UserController extends AbstractController
     /**
      * @Route("/edition/{id}", defaults={"id":null}, requirements={"id": "\d+"})
      */
-    public function edit(Request $request, EntityManagerInterface $manager, $id)
+    public function passepremium(Request $request, EntityManagerInterface $manager, $id)
     {
-        if(is_null($id)){
-            $user = new User();
-        } else {
-            $user = $manager->find(User::class, $id);
-            $user->setPremium(1); // on set le user en premium
-
-            if(is_null($user)) {
-                throw new NotFoundHttpException();
-            }
-        }
-
-        $form = $this->createForm(UserType::class, $user);
-        $form->handleRequest($request);
-
-        if($form->isSubmitted()) {
-            if($form->isValid()) {
-
-                $manager->persist($user);
-                $manager->flush();
-                $this->addFlash('success', 'Le user est passé en premium');
-                return $this->redirectToRoute('app_admin_user_index');
-            } else {
-                $this->addFlash('error', 'Le formulaire contient des erreurs');
-            }
-        }
-
-        return $this->render(
-            'admin/user/edit.html.twig',
-            ['form' => $form->createView()]
-        );
+        $user = $manager->find(User::class, $id);
+        $user->setPremium(1); // on set le user en premium
+        $manager->persist($user);
+        $manager->flush();
+        $this->addFlash('success', 'Le user est passé en premium');
+        return $this->redirectToRoute('app_admin_user_index');
     }
 
 
+    /**
+     * @Route("/suppression/{id}", defaults={"id":null}, requirements={"id": "\d+"})
+     */
+    public function supprimepremium(Request $request, EntityManagerInterface $manager, $id)
+    {
+        $user = $manager->find(User::class, $id);
+        $user->setPremium(0); // on set le user en non-premium
+        $manager->persist($user);
+        $manager->flush();
+        $this->addFlash('error', 'Le user n\'est plus premium');
+        return $this->redirectToRoute('app_admin_user_index');
+    }
 
 }
