@@ -6,7 +6,6 @@ namespace App\Form;
 
 
 use App\Entity\Destination;
-use App\Entity\Duree;
 use App\Entity\Search;
 use App\Entity\TypeHebergement;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -44,8 +43,6 @@ class SearchType extends AbstractType
                     'choice_label'=>'getNom',
                     'placeholder'=>'Choisissez la durée du séjour',
                     'required'=>false])
-
-
 
             ->add('typeHebergement',EntityType::class,
                 ['class'=>TypeHebergement::class,
