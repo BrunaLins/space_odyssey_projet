@@ -40,8 +40,7 @@ class IndexController extends AbstractController
 
         $sejours = $repository2->findBy(
             [],
-            ['id' => 'ASC'],
-            5
+            ['id' => 'ASC']
         );
 
         $typehebergements = $repository3->findBy(
