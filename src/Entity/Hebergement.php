@@ -33,6 +33,11 @@ class Hebergement
      */
     private $type_hebergement;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $prix;
+
 
     public function getId(): ?int
     {
@@ -71,6 +76,18 @@ class Hebergement
     public function setTypeHebergement(?TypeHebergement $type_hebergement): self
     {
         $this->type_hebergement = $type_hebergement;
+
+        return $this;
+    }
+
+    public function getPrix(): ?int
+    {
+        return $this->prix;
+    }
+
+    public function setPrix(?int $prix): self
+    {
+        $this->prix = $prix;
 
         return $this;
     }

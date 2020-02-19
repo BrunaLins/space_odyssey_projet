@@ -5,39 +5,56 @@
 {% endblock %}
 
 {% block body %}
-    <h1>{{ sejour.titre }}</h1>
-    <p>
-        <strong>{{ sejour.titre }}</strong>
+    <br>
+    <br>
+    <br>
+    <div class="container sejour">
+        {# Affichage séjour dans sa card détaillée #}
+        <h1>{{ sejour.titre }}</h1>
+        <div>
+            <img src="{{ asset('images/' ~ sejour.image1) }}">
+        </div>
         <br>
-        <em>{{ sejour.duree}}</em>
-
-
-
-    <p>{{ sejour.description|nl2br }}</p>
-    <h2>Commentaires</h2>
-    {% if app.user is null%}
-        <div>Vous devez
-            <a href="{{ path('app_user_login') }}">Vous connecter</a>Pour publier un commentaire</div>
+        <p><em>Mois de départ : {{ sejour.moisDepart|date('m/Y') }}</em></p>
+        <p><em>Durée du séjour : {{ sejour.dureedata }}</em></p>
+        <p>{{ sejour.description|nl2br }}</p>
+        {% if sejour.image2 %}
+        <div>
+            <img src="{{ asset('images/' ~ sejour.image2) }}">
+        </div>
+        {% endif %}
+        <div class="text-right">
+            <button type="submit" class="">Réserver</button>
+        </div>
+        <br>
+    </div>
+    <br>
+    <br>
+    <h3>Commentaires</h3>
+    {% if app.user is null %}
+        <div>Vous devez <a href="{{ path('app_user_login') }}"> vous connecter </a> pour publier un commentaire</div>
+        <br>
     {% else %}
+        {# Affichage formulaire de commentaires #}
         {{ form_start(form) }}
         {{ form_row(form.contenu) }}
         {{ form_row(form.note) }}
-
-        <div>
+        <div class="text-right">
             <button type="submit" class="">Envoyer</button>
         </div>
         {{ form_end(form) }}
     {% endif %}
+
     {% for comment in sejour.comments %}
-        <h5>{{ comment.user }}
-        <div class="">
-            <div class="">
-                {{ comment.contenu|nl2br }}
-            </div>
-        </div>
+        {# Affichage commentaires en liste #}
+            <p class="font-size: 0.9rem">{{ comment.contenu|nl2br }}</p>
+            <p style="font-size: 0.9rem">Note : ({{ comment.note }}/5)</p>
+            <p style="text-align: right">
+                <span style="font-size: 0.7rem"> ecrit par {{ comment.user }}</span>
+                <span style="font-size: 0.7rem"> le {{ comment.publicationDate|date('d/m/Y H:i') }}</span>
+            </p>
     {% else %}
         <p>Aucun commentaire pour ce sejour</p>
-
     {% endfor %}
 
 {% endblock %}

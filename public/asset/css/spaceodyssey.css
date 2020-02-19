@@ -285,7 +285,7 @@ figure {
 /*    position: absolute;*/
 /*    left: 200px;*/
 /*    top: 200px;*/
-}
+
 .containerForm{
     max-width: 75%;
     /*left: 25%;*/
@@ -296,7 +296,7 @@ figure {
 
 }
 button[type=submit] {
-    background-color: #1b1a19;
+    background-color: green;
     color: white;
     padding: 5px;
     border: none;
@@ -306,8 +306,7 @@ button[type=submit] {
     margin: 0 10px 0 10px;
 }
 button[type=submit]:hover {
-    background-color: #f6dabdde;
-
+    background-color: #5166ff;
 }
 .select_search{
     text-align: center;
@@ -318,36 +317,10 @@ button[type=submit]:hover {
     margin: 2px;
     background-color: rgba(29, 28, 27, 0.89);
 }
-/* ------------------------------- formulaire register ---------------- */
-
-.form_register{
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    margin-top: 6px;
-    margin-bottom: 5px;
-    margin-right: 0px;
-    margin-left: 0px;
-    resize: vertical;
-}
-.form_register_cadre{
-
-}
-.containerFormRegister {
 
 
-    max-width:100%;
-    /*left: 25%;*/
-    top: 20%;
-    background-color: rgba(202, 197, 192, 0.5);
-    padding: 30px;
-    border-radius: 6px;
-}
-.marginRegister {
-   margin-bottom: 20px;
-}
+
+
 
 /* ----------------------------- titre ---------------------------- */
 
@@ -529,3 +502,155 @@ button[type=submit]:hover {
 .sejour button{
     margin-bottom: 5px ;
 }
+/* -----------------------  CSS ROMUALD ----------------------------------------- */
+.card_show{
+    padding-left: 10px;
+    background-color: ivory;
+    margin-left: 50px;
+    margin-top: 50px;
+    width: 980px;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 30px;
+    box-shadow: 10px 10px 5px 0 rgba(0,0,0,0.75);
+}
+
+.image{
+    border-radius: 30px;
+    width: 400px;
+    height: 400px;
+    overflow: hidden;
+}
+
+
+.info{
+
+    flex-grow: 1;
+}
+.validate{
+    display: flex;
+    justify-content: center;
+}
+.validate_btn{
+    width: 170px;
+    height: 30px;
+    color: white;
+    background-color: green;
+    font-weight: bold;
+}
+.validate_btn:hover{
+    background-color: green;
+}
+.titre{
+    text-align: center;
+}
+.promo{
+    color: red;
+    font-weight: bolder;
+    overflow: hidden;
+    white-space: nowrap;
+    animation: typing 8s steps(30, end)
+}
+
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+
+.detail_voyage{
+    display: flex;
+}
+
+.description{
+    width: 550px;
+}
+.detail{
+    width: 300px;
+}
+.prix_sejour{
+    display: flex;
+}
+.care{
+    height: 60px;
+    width: 150px;
+    background: #efefef;
+    border-radius: 30px;
+    box-shadow: 10px 10px 5px 0 rgba(0,0,0,0.75);
+    animation-duration: 3s;
+    animation-name: slidein;
+}
+
+@keyframes slidein {
+    from {
+        margin-left: 100%;
+    }
+    to {
+        margin-left: 0;
+    }
+}
+
+
+.care p{
+    text-align: center;
+}
+
+/* Affichage profil utilisateur*/
+
+.profil{
+    display: flex;
+    width: 60%;
+    margin: auto;
+}
+
+.user_info{
+    width: 50%;
+    height: 300px;
+    padding: 10px;
+}
+
+.user_info h5{
+    text-align: center;
+}
+
+/*----------------------formulaire connextion------------------------------*/
+
+
+.label_connexion{
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 5px;
+    margin-right: 0px;
+    margin-left: 0px;
+    resize: vertical;
+}
+
+.Form_connexion{
+
+
+    max-width:100%;
+    /*left: 25%;*/
+    top: 20%;
+    background-color: rgba(202, 197, 192, 0.5);
+    padding: 30px;
+    border-radius: 6px;
+}
+.marginRegister {
+    margin-bottom: 20px;
+
+}
+
+
+
+
+
+
+
+
+
+
+

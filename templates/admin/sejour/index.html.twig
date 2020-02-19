@@ -12,13 +12,13 @@
     <table class="table">
         <tr class="table-dark">
             <th>Id</th>
-            <th>Titre</th>
-            <th>Description</th>
+            <th class="w-25">Titre</th>
+            <th class="w-50">Description</th>
             <th>Durée</th>
-            <th>Date Départ</th>
-            <th>Places restantes</th>
+            <th>Départ</th>
+{#            <th>Places restantes</th>#}
             <th>Promo</th>
-            <th width="250px"></th>
+            <th class="w-25"></th>
         </tr>
         {% for sejour in sejours %}
             <tr>
@@ -26,8 +26,8 @@
                 <td>{{ sejour.titre }}</td>
                 <td>{{ sejour.description }}</td>
                 <td>{{ sejour.dureedata }}</td>
-                <td>{{ sejour.moisDepart|date('d/m/Y H:i') }}</td>
-                <td>{{ sejour.stock }}</td>
+                <td>{{ sejour.moisDepart|date('m/Y') }}</td>
+{#                <td>{{ sejour.stock }}</td>#}
                 <td>{{ sejour.promo }}</td>
                 <td>
                     <a href="{{ path('app_admin_sejour_edit', {'id': sejour.id}) }}" class="btn btn-secondary">

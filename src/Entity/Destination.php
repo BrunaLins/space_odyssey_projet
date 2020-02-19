@@ -33,6 +33,11 @@ class Destination
      */
     private $hebergements;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $destination_premium;
+
     public function __construct()
     {
         $this->sejours = new ArrayCollection();
@@ -119,6 +124,18 @@ class Destination
                 $hebergement->setDestination(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDestinationPremium(): ?bool
+    {
+        return $this->destination_premium;
+    }
+
+    public function setDestinationPremium(?bool $destination_premium): self
+    {
+        $this->destination_premium = $destination_premium;
 
         return $this;
     }

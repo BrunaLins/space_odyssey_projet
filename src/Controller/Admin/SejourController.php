@@ -9,6 +9,7 @@ use App\Form\SejourType;
 use App\Repository\CommentRepository;
 use App\Repository\SejourRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Log\Test\DummyTest;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -43,6 +44,7 @@ class SejourController extends AbstractController
     public function edit(Request $request, EntityManagerInterface $manager, $id)
     {
         $originalImage1 = null;
+        $originalImage2 = null;
 
         if(is_null($id)) {
             $sejour = new Sejour();
@@ -63,6 +65,13 @@ class SejourController extends AbstractController
                 );
             }
 
+            if(!is_null($sejour->getImage2())) {
+                $originalImage2 = $sejour->getImage2();
+                $sejour->setImage2(
+                    new File($this->getParameter('upload_dir'). $originalImage2)
+                );
+            }
+
         }
 
         $form = $this->createForm(SejourType::class, $sejour);
@@ -74,7 +83,7 @@ class SejourController extends AbstractController
                 /** @var UploadedFile|null $image1 */
                 $image1 = $sejour->getImage1();
 
-                // s'il y a eu une iamge uploadée
+                // s'il y a eu une image uploadée
                 if (!is_null($image1)) {
                     // nom sous lequel on va enregistrer l'image dans la base
                     $filename = uniqid() . '.' . $image1->guessExtension();
@@ -98,6 +107,23 @@ class SejourController extends AbstractController
                     $sejour->setImage1($originalImage1);
                 }
 
+                /** @var UploadedFile|null $image2 */
+                $image2 = $sejour->getImage2();
+                if (!is_null($image2)) {
+                    $filename2 = uniqid() . '.' . $image2->guessExtension();
+                    // dump($filename2);
+                    $image2->move(
+                        $this->getParameter('upload_dir'),
+                        $filename2
+                    );
+                    $sejour->setImage2($filename2);
+                    if (!is_null($originalImage2)) {
+                        unlink($this->getParameter('upload_dir'). $originalImage2);
+                    }
+                } else {
+                    $sejour->setImage2($originalImage2);
+                }
+
                 $manager->persist($sejour);
                 $manager->flush();
                 $this->addFlash('success', 'Le séjour est enregistré');
@@ -110,7 +136,8 @@ class SejourController extends AbstractController
         return $this->render(
             'admin/sejour/edit.html.twig',
             ['form' => $form->createView(),
-                'original_image1' => $originalImage1]
+                'original_image1' => $originalImage1,
+                'original_image2' => $originalImage2]
         );
     }
 

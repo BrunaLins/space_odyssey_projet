@@ -3,10 +3,10 @@
 </button>
 <div class="collapse navbar-collapse border" id="navbarDestination">
     <ul class="navbar-nav">
-        {% for destination in destinations %}
+        {% for premiumdestination in premiumdestinations %}
             <li class="nav-item">
-                <a class="nav-link" href="{{ path('app_search_index2', {'id': destination.id}) }}">
-                    {{ destination.nom }}
+                <a class="nav-link" href="{{ path('app_search_index2', {'id': premiumdestination.id}) }}">
+              <span style="color: gold">{{ premiumdestination.nom }}</span>
                 </a>
             </li>
         {% endfor %}

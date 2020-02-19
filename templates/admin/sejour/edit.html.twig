@@ -14,7 +14,11 @@
 
     {{ form_row(form.dureedata) }}
 
+    {{ form_row(form.moisDepart) }}
+
     {{ form_row(form.description) }}
+
+    {{ form_row(form.promo) }}
 
     {% if original_image1 is not null %}
         <p>
@@ -25,9 +29,18 @@
 
     {{ form_row(form.image_1) }}
 
-    {{ form_row(form.stock) }}
+    {% if original_image2 is not null %}
+        <p>
+            Image actuelle :
+            <img  src="{{ asset('images/' ~ original_image2) }}" height="200px">
+        </p>
+    {% endif %}
 
-    {{ form_row(form.promo) }}
+    {{ form_row(form.image_2) }}
+
+{#    {{ form_row(form.stock) }}#}
+
+
 
     <div class="text-right">
         <button type="submit" class="btn btn-primary">

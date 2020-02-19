@@ -98,6 +98,24 @@ dump($search);
 
 
     }
+
+    public function findByPremium(bool $premium = false)
+    {
+        $qb = $this->createQueryBuilder('s');
+
+        if (!$premium) {
+            $qb
+                ->join('s.destination', 'd')
+                ->andWhere('d.destination_premium = :premium')
+                ->setParameter('premium', $premium)
+            ;
+        }
+
+            $qb->addOrderBy('s.mois_depart', 'ASC')
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
 }
 
 

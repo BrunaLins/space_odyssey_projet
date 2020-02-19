@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Modifier mes informations</h1>
+
+    {{ form_start(form) }}
+
+    {{ form_row(form.civilite) }}
+    {{ form_row(form.nom) }}
+    {{ form_row(form.prenom) }}
+    {{ form_row(form.email) }}
+    {{ form_row(form.codepostal) }}
+    {{ form_row(form.adresse) }}
+    {{ form_row(form.ville) }}
+    {{ form_row(form.pays) }}
+    <button type="submit">Enregistrer</button>
+    {{ form_end(form) }}
+
+{% endblock %}
+
+
+

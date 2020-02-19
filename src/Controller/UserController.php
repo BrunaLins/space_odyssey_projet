@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationType;
+use App\Form\UpdateType;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -59,9 +61,9 @@ class UserController extends AbstractController
         $error = $utils->getLastAuthenticationError();
         $lastUsername = $utils->getLastUsername();
 
-        if(empty($error)){
+        /*if(empty($error)){
             $this->addFlash('success','vous etes connécte');
-        }
+        }*/
 
         if(!empty($error)){
             $this->addFlash('error', 'Identifiants incorrects');
@@ -78,4 +80,45 @@ class UserController extends AbstractController
     public function logout(){
 
     }
+
+    /**
+     * Affiche la page mon compte avec possibilité de modifier mes infos
+     * @Route("/info")
+     */
+    public function profil(UserRepository $userRepository)
+    {
+        return $this->render('user/index.html.twig');
+    }
+
+    /**
+     *@Route("/update")
+     */
+    public function update(Request $request,EntityManagerInterface $manager)
+    {
+        $user = $this->getUser();
+
+        $form = $this->createForm(UpdateType::class,$user);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted()){
+            if($form->isValid()){
+                $manager->persist($user);
+            }
+            $manager->flush();
+            $this->addFlash('success',
+                'Profil mise à jour');
+            return $this->redirectToRoute('app_user_profil');
+        }else{
+            $this->addFlash('error',
+                'Le formulaire contient des erreurs');
+        }
+
+
+        return $this->render('user/update.html.twig',
+            ['form'=>$form->createView()]);
+    }
+
+
+
+
 }

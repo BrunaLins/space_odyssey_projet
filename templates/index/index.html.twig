@@ -4,7 +4,6 @@
     <h2>Nos Séjours</h2>
     <br>
     <br>
-
     <div>
         <table>
             {% for sejour in sejours %}
@@ -19,9 +18,14 @@
                 </tr>
                 <tr>
                     {% if sejour.promo %}
-                        <td style="color: red; font-size: 1.2rem;">Promo ! {{ sejour.titre }}</td>
+                        <td style="color: red; font-size: 1.2rem;">Promo !
+                            <a href="{{ path('app_sejour_index', {'id': sejour.id}) }}">{{ sejour.titre }}</a>
+                            <span style="color: black">Depart en : {{ sejour.moisDepart|date('m/Y') }}</span>
+                        </td>
                     {% else %}
-                        <td style="font-size: 1.2rem;">{{ sejour.titre }}</td>
+                        <td> <a href="{{ path('app_sejour_index', {'id': sejour.id}) }}">{{ sejour.titre }}</a>
+                            <span>Depart en :  {{ sejour.moisDepart|date('m/Y') }}</span>
+                        </td>
                     {% endif %}
                     <td>{{ sejour.description }}</td>
                     <td>{{ sejour.dureedata }}</td>
@@ -41,6 +45,7 @@
         {% endfor %}
     </div>
 
+    {# liste des commentaires du carrousel #}
     <table>
         {% for comment in comments %}
             <tr>

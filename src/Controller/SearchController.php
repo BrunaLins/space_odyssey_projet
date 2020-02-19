@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 
+use App\Entity\Destination;
 use App\Repository\SejourRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -23,5 +24,16 @@ class SearchController extends AbstractController
 
         return $this->render('search/index.html.twig',
             ['result'=>$result]);
+    }
+
+
+    /**
+     * @Route("/{id}",requirements={"id": "\d+"})
+     */
+    public function index2(SejourRepository $repository, Destination $destination)
+    {
+        $result=$repository->findby(['destination' => $destination],['id'=>'ASC']);
+
+        return $this->render('search/index.html.twig', ['result' =>$result]);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 
+use App\Entity\Destination;
 use App\Form\SearchType;
 use App\Repository\CommandeRepository;
 use App\Repository\CommentRepository;
@@ -38,10 +39,10 @@ class IndexController extends AbstractController
             ['id' => 'ASC']
         );
 
-        $sejours = $repository2->findBy(
-            [],
-            ['id' => 'ASC']
-        );
+        $sejours = $repository2->findByPremium(
+            $this->getUser() ? $this->getUser()->getPremium() : false
+    );
+        dump($sejours);
 
         $typehebergements = $repository3->findBy(
             [],
@@ -92,6 +93,7 @@ class IndexController extends AbstractController
                 'best_sejours' => $bestSejours
             ]);
     }
+
 
 
 }

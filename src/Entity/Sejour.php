@@ -87,6 +87,8 @@ class Sejour
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="sejour",cascade={"remove"})
+     *
+     * @ORM\OrderBy({"publication_date": "DESC"})
      */
     private $comments;
 
@@ -111,6 +113,7 @@ class Sejour
         $this->commandes = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->mois_depart = new \DateTime();
+        $this->stock = 1000; // optionnel
         $this->duree = 0; // en attente de suppression
         $this->prix_sejour = 0; // en attente de suppression
     }
@@ -180,12 +183,12 @@ class Sejour
         return $this;
     }
 
-    public function getImage2(): ?string
+    public function getImage2()
     {
         return $this->image_2;
     }
 
-    public function setImage2(?string $image_2): self
+    public function setImage2($image_2): self
     {
         $this->image_2 = $image_2;
 

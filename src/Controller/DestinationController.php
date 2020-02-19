@@ -31,11 +31,24 @@ class DestinationController extends AbstractController
 
     public function menu(DestinationRepository $repository) // pas de route car c'est un bout de page qu'on va intégrer dans les pages
     {
-        $destinations = $repository->findBy([], ['id' => 'ASC']);
+        $destinations = $repository->findBy(
+            ['destination_premium' => false],
+            ['id' => 'ASC']);
 
         return $this->render(
             'destination/menu.html.twig',
             ['destinations' => $destinations]
+        );
+    }
+
+    public function menupremium(DestinationRepository $repository)
+    {
+        $premiumdestinations = $repository->findBy(
+            ['destination_premium' => true]);
+        // dump($premiumdestinations);
+        return $this->render(
+            'destination/menupremium.html.twig',
+            ['premiumdestinations' => $premiumdestinations]
         );
     }
 

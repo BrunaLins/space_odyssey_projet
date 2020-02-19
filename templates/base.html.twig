@@ -55,8 +55,14 @@
                 {% endif %}
             {% endif %}
         </a>
-
         {{ render(controller('App\\Controller\\DestinationController::menu')) }}
+        {% if app.user is null %}
+            <span></span>
+        {% else %}
+            {% if (app.user.premium) %}
+                {{ render(controller('App\\Controller\\DestinationController::menupremium')) }}
+            {% endif %}
+        {% endif %}
 
         <!-- <video autoplay muted loop id="myVideo">
              <source src="asset/myvideo.mp4" type="video/mp4">
@@ -80,11 +86,15 @@
                     {% endif %}
                 </li>
                 <li>
+                    <a href="{{ path('app_user_profil') }}" class="">
+                        <i class="fas fa-users"></i>Mon profil
+                    </a>
                     <a href="{{ path('app_user_logout') }}" class="">Déconnexion</a>
                 </li>
             {% endif %}
         </ul>
     </div>
+
 </nav>
 <div class="container">
     {# affichage des messages flash #}
@@ -99,6 +109,11 @@
             </div>
         {% endfor %}
     {% endfor %}
+    {# {% if (app.user.premium) %}
+     <div>
+         <span style="color: gold">  Space Odyssey Premium  </span>
+     </div>
+     {% endif %}#}
     {% block body %}{% endblock %}
 </div>
 {% block javascripts %}
