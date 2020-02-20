@@ -94,6 +94,14 @@ dump($search);
             ;
         }
 
+        if (!empty($search['moisDepart'])) {
+            $qb
+                ->andWhere('s.mois_depart = :moisDepart')
+                ->setParameter('moisDepart', $search['moisDepart'])
+            ;
+        }
+
+
         return $qb->getQuery()->getResult();
 
 

@@ -23,7 +23,7 @@
         <div class="profil">
             <div class="user_info">
                 <h5>Mes informations</h5>
-                <p><strong>Civilité : </strong><em>{{ app.user.civilite}}</em></p>
+                <p><strong>Civilité : </strong><em>{{ app.user.civilite }}</em></p>
                 <p><strong>Nom : </strong>{{ app.user.nom|upper }}</p>
                 <p><strong>Prénom : </strong>{{ app.user.prenom|capitalize }}</p>
                 <p><strong>E-mail : </strong>{{ app.user.email|lower }}</p>
@@ -33,13 +33,45 @@
                 <p><strong>Adresse : </strong>{{ app.user.adresse|capitalize }}</p>
                 <p><strong>Code postal : </strong>{{ app.user.codepostal }}</p>
                 <p><strong>Ville : </strong>{{ app.user.ville|capitalize }}</p>
-                <p><strong>Pays : </strong>{{ app.user.pays|upper  }}</p>
-
+                <p><strong>Pays : </strong>{{ app.user.pays|upper }}</p>
+            </div>
+            <div>
                 <a href="{{ path('app_user_update') }}" class="btn btn-primary" style="text-decoration: none">
                     Modifier mon profil
                 </a>
             </div>
         </div>
+        <hr>
+        <h1>Mes Commandes</h1>
+
+        <div class="profil">
+            <div class="table">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Id Commande</th>
+                        <th>Date Commande</th>
+                        <th>Nbre de personnes</th>
+                        <th>Montant</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% if commandes %}
+                        {% for commande in commandes %}
+                            <tr>
+                                <td>{{ commande.id }}</td>
+                                <td>{{ commande.dateCommande|date('m/Y') }}</td>
+                                <td>{{ commande.nbrePersonne }}</td>
+                                <td>{{ commande.prixFinal }}</td>
+                            </tr>
+                        {% endfor %}
+                    {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
     {% endif %}
 
 {% endblock %}

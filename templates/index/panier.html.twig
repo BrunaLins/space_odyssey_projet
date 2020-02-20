@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="panier">
+
+        {% if app.user %}
+
+            <h1  class="centre">mon panier</h1>
+
+            {% if sjrs|length > 0  %}
+
+
+                <table class="content-table">
+                    <thead>
+                    <tr>
+                        <th class="centre">Detail</th>
+                        <th>Prix</th>
+                        <th>Quantité</th>
+                        <th>Promo</th>
+                        <th>Montant promo</th>
+                        <th>Total</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for sjr in sjrs %}
+                        <tr class="active-row">
+                            <td>{{ sjr.sejour.titre }}</td>
+                            <td>{{ sjr.sejour.prixSejour|number_format(2, ",", ".") }}</td>
+                            <td>{{ sjr.quantite }}</td>
+                            {% if sjr.sejour.promo <= 0 %}
+                                <td></td>
+                            {% else %}
+                                <td>{{ sjr.sejour.promo }}%</td>
+                            {% endif %}
+                            <td>{{ ((sjr.sejour.prixSejour * sjr.quantite)* (sjr.sejour.promo)/100)|number_format(2, ",", ".") }}</td>
+                            <td>{{ (sjr.sejour.prixSejour * sjr.quantite)|number_format(2, ",", ".") }}</td>
+                            <td>
+                                <a href="{{ path('app_index_supprimersejour',{'id':sjr.sejour.id}) }}">
+                                    <i class="fas fa-trash" style="color: red"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td colspan="3" class="total">TOTAL</td>
+                        <td class="prix_total">{{ total|number_format(2, ",", ".") }}</td>
+                        <td></td>
+                    </tr>
+                    </tfoot>
+
+                </table>
+
+                <div class="paiement">
+                    <a href="#" class="payer"><i class="fab fa-amazon-pay"></i>
+                        Payer
+                    </a>
+                </div>
+
+            {% else %}
+                <p>Votre panier ets vide</p>
+            {% endif %}
+
+        {% else %}
+            <a href="{{ path('app_user_login') }}">
+                Connectez-vous
+            </a>
+            ou
+            <a href="{{ path('app_user_register') }}">
+                Créer un compte
+            </a>
+        {% endif %}
+
+    </div>
+
+
+{% endblock %}

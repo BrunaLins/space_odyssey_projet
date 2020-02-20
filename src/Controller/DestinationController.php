@@ -34,7 +34,7 @@ class DestinationController extends AbstractController
         $destinations = $repository->findBy(
             ['destination_premium' => false],
             ['id' => 'ASC']);
-
+            dump($destinations);
         return $this->render(
             'destination/menu.html.twig',
             ['destinations' => $destinations]

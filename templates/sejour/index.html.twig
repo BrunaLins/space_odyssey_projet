@@ -12,7 +12,7 @@
         {# Affichage séjour dans sa card détaillée #}
         <h1>{{ sejour.titre }}</h1>
         <div>
-            <img src="{{ asset('images/' ~ sejour.image1) }}">
+            <img src="{{ asset('images/' ~ sejour.image1) }}" width="100%">
         </div>
         <br>
         <p><em>Mois de départ : {{ sejour.moisDepart|date('m/Y') }}</em></p>

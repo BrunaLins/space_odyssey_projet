@@ -49,6 +49,12 @@ class Commande
      */
     private $type_hebergement;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Hebergement", inversedBy="commandes")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $hebergement;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -122,6 +128,18 @@ class Commande
     public function setTypeHebergement(?TypeHebergement $type_hebergement): self
     {
         $this->type_hebergement = $type_hebergement;
+
+        return $this;
+    }
+
+    public function getHebergement(): ?Hebergement
+    {
+        return $this->hebergement;
+    }
+
+    public function setHebergement(?Hebergement $hebergement): self
+    {
+        $this->hebergement = $hebergement;
 
         return $this;
     }

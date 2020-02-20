@@ -95,5 +95,79 @@ class IndexController extends AbstractController
     }
 
 
+    /**
+     * Creation du panier
+     * @Route("/panier")
+     */
+    public function panier(SessionInterface $session,SejourRepository $sejourRepository)
+    {
+        $panier = $session->get('panier',[]);
+
+        $panierPlein = [];
+        //recupérer les info du séjour choisit
+        foreach ($panier as $id => $quantite){
+            $panierPlein[] = [
+                'sejour'=>$sejourRepository->find($id),
+                'quantite'=>$quantite
+            ];
+        } // dd($panier);
+
+        $total = 0;
+        $promo =0;
+
+        // calculer le prix du séjour et faire le total
+        foreach ($panierPlein as $sjr){
+            $totalsjr = $sjr['sejour']->getPrixSejour() *$sjr['quantite'];
+            $total += $totalsjr;
+        }
+        // calcul de la promo
+        foreach ($panierPlein as $sjr){
+            $promosjr= ($sjr['sejour']->getPrixSejour() *$sjr['quantite'])*(($sjr['sejour']->getPromo())/100);
+            $promo += $promosjr;
+        }
+        // calcul du prix total du séjour après promo
+        $total = $total - $promo;
+
+
+        return $this->render('index/panier.html.twig',
+            ['sjrs'=>$panierPlein,'total'=>$total]);
+    }
+
+
+
+    /**
+     * Ajoute de sejour dans le panier
+     * @Route("/panier/add/{id}")
+     */
+    public function add(SessionInterface $session,$id)
+    {
+        $panier = $session->get('panier',[]);
+        //incrémentation du séjour dans le panier
+        if (!empty($panier[$id])){
+            $panier[$id]++;
+        }else{
+            $panier[$id]=1;
+        }
+        $session->set('panier',$panier);
+
+        return $this->redirectToRoute('app_index_panier');
+    }
+
+    /**
+     * Supprimer un produit du panier
+     * @Route("/panier/supprimer/{id}")
+     */
+    public function supprimerSejour($id,SessionInterface $session)
+    {
+        $panier = $session->get('panier',[]);
+
+        if (!empty($panier[$id])){
+            unset($panier[$id]);
+        }
+        //mettre le panier à jour après suppression
+        $session->set('panier',$panier);
+        return $this->redirectToRoute('app_index_panier');
+    }
+
 
 }

@@ -30,6 +30,15 @@
                     <td>{{ sejour.description }}</td>
                     <td>{{ sejour.dureedata }}</td>
                 </tr>
+                <tr>
+                    <td>
+                        <a href="{{ path('app_index_add',{'id': sejour.id}) }}">
+                            <i class="fas fa-shopping-cart mr-1"></i>
+                            Réserver
+                        </a>
+                    </td>
+
+                </tr>
             {% endfor %}
         </table>
     </div>
@@ -73,12 +82,20 @@
                 <div class="col">
                     {{ form_row(form.typeHebergement) }}
                 </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    {{ form_row(form.moisDepart) }}
+                </div>
+                <div class="col">
+                    {{ form_row(form.duree) }}
+                </div>
+            </div>
+            <div class="row">
                 <div class="col">
                     <button class="btn btn-info">Rechercher</button>
                 </div>
             </div>
-
-
             {{ form_end(form) }}
         </div>
     </div>

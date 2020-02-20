@@ -10,6 +10,7 @@ use App\Entity\Duree;
 use App\Entity\TypeHebergement;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -24,7 +25,7 @@ class SearchType extends AbstractType
                 [
                     'class'=>Destination::class,
                     'choice_label'=>'getNom',
-                    'placeholder'=>'Choisissez une catégorie',
+                    'placeholder'=>'Choisissez une destination',
                     'required'=>false,
 //                    attr = attribut dans les balise html pour ajouter du syle css champ option
 //                    label_attr = changement css label crée une class css
@@ -42,12 +43,19 @@ class SearchType extends AbstractType
                 ['class'=>Duree::class,
                     'choice_label'=>'getNom',
                     'placeholder'=>'Choisissez la durée du séjour',
-                    'required'=>false])
+                    'required'=>false,
+                    'attr' => [
+                        'class' => 'form_search'
+                    ],
+                    'label_attr' =>[
+                        'class' => 'label_search'
+                    ]
+                ])
 
             ->add('typeHebergement',EntityType::class,
                 ['class'=>TypeHebergement::class,
                     'choice_label'=>'getNom',
-                    'placeholder'=>'Choisissez votre héberment',
+                    'placeholder'=>'Choisissez votre hébergement',
                     'required'=>false,
                     'attr' => [
                         'class' => 'form_search'
@@ -56,7 +64,22 @@ class SearchType extends AbstractType
                         'class' => 'label_search'
                     ]
                 ]
-            );
+            )
+
+            ->add('moisDepart',DateType::class,
+                [
+                    'label'=>'Mois de départ',
+                    'required'=>false,
+                    'attr' => [
+                        'class' => 'form_search'
+                    ],
+                    'label_attr' =>[
+                        'class' => 'label_search'
+                    ]
+                ]
+            )
+
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
