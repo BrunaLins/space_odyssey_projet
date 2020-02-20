@@ -24,22 +24,31 @@ class User implements UserInterface, \Serializable
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=30)
+     * @ORM\Column(type="string", length=2)
+     * @Assert\NotBlank(message="La civilité est obligatoire")
      */
     private $civilite;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\NotBlank(message="Le nom est obligatoire")
+     * @Assert\Length(max="50",
+     *     maxMessage="Le nom ne doit pas faire plus de {{ limit }} caractères ")
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\NotBlank(message="Le prénom est obligatoire")
+     * @Assert\Length(max="50",
+     *     maxMessage="Le prénom ne doit pas faire plus de {{ limit }} caractères ")
      */
     private $prenom;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=100, unique=true)
+     *  @Assert\NotBlank(message="L'email est obligatoire")
+     * @Assert\Email(message="L'email n'est pas valide")
      */
     private $email;
 
@@ -65,21 +74,33 @@ class User implements UserInterface, \Serializable
     private $role ='ROLE_USER';
     /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank(message="L'adresse est obligatoire")
+     * @Assert\Length(max="50",
+     *     maxMessage="L'adresse' ne doit pas faire plus de {{ limit }} caractères ")
      */
     private $adresse;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=7)
+     * @Assert\NotBlank(message="Le code postal est obligatoire")
+     * @Assert\Length(max="7",
+     *     maxMessage="Le code postal ne doit pas faire plus de {{ limit }} caractères ")
      */
     private $codepostal;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\NotBlank(message="La ville est obligatoire")
+     * @Assert\Length(max="50",
+     *     maxMessage="La ville ne doit pas faire plus de {{ limit }} caractères ")
      */
     private $ville;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\NotBlank(message="Le pays est obligatoire")
+     * @Assert\Length(max="50",
+     *     maxMessage="Le pays ne doit pas faire plus de {{ limit }} caractères ")
      */
     private $pays;
 

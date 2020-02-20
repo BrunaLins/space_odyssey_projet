@@ -48,12 +48,27 @@ class CommandeController extends AbstractController
         $commande
             ->setUser($this->getUser());
 
+        $prixTotal = 0;
+        foreach ($session->get('panier') as $sejourId => $nbPersonne) {
+            $sejour = $manager->getRepository(Sejour::class)->find($sejourId);
+            $prix = $sejour->getPrixSejour() * $nbPersonne;
+            if (!empty($sejour->getPromo())) {
+                $remise = $prix * ($sejour->getPromo() / 100);
+                $prix -= $remise;
+            }
+
+            $prixTotal += $prix;
+        }
+
+        $commande
+            ->setPrixFinal($prixTotal);
+
 
         $manager->persist($commande);
         $manager->flush();
         $this->addFlash('success', 'La commande est passée');
 
-        dump($session);
+
 
         // il faut vider le panier et envoyer mail
 

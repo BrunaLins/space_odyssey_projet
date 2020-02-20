@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -21,8 +22,14 @@ class UpdateType extends AbstractType
                 TextType::class,
                 ['label' =>'Prénom']
             )
-            ->add('civilite',TextType::class,[
-                'label'=>'Civilite'])
+            ->add('civilite',ChoiceType::class,
+                ['label'=>'Civilite',
+                    'choices' => [
+                        'Choisissez une civilité' => '',
+                        'Mr' => 'Mr',
+                        'Mme' =>'Mme'
+                    ]
+                ])
 
             ->add ('adresse',TextType::class,
                 ['label'=>'Adresse'])

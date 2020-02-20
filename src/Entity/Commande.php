@@ -18,7 +18,7 @@ class Commande
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $nbre_personne;
 
@@ -60,9 +60,7 @@ class Commande
     {
 /*        $this->commandes = new ArrayCollection();
         $this->comments = new ArrayCollection();*/
-        $this->date_commande = new \DateTime();
-        $this->prix_final = 1000; // optionnel
-        $this->nbre_personne = 10; // en attente de suppression
+        $this->date_commande = new \DateTime('+10years');
     }
 
     public function getId(): ?int

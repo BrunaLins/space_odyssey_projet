@@ -95,6 +95,7 @@ class UserController extends AbstractController
      */
     public function update(Request $request,EntityManagerInterface $manager)
     {
+
         $user = $this->getUser();
 
         $form = $this->createForm(UpdateType::class,$user);
@@ -103,16 +104,15 @@ class UserController extends AbstractController
         if($form->isSubmitted()){
             if($form->isValid()){
                 $manager->persist($user);
-            }
-            $manager->flush();
-            $this->addFlash('success',
-                'Profil mise à jour');
-            return $this->redirectToRoute('app_user_profil');
+                $manager->flush();
+                $this->addFlash('success',
+                    'Profil mise à jour');
+                return $this->redirectToRoute('app_user_profil');
         }else{
             $this->addFlash('error',
                 'Le formulaire contient des erreurs');
+            }
         }
-
 
         return $this->render('user/update.html.twig',
             ['form'=>$form->createView()]);

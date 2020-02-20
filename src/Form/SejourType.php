@@ -52,7 +52,10 @@ class SejourType extends AbstractType
             )
             ->add('moisDepart',
                 DateType::class,
-                ['label' => 'Mois départ']
+                [
+                    'label' => 'Mois départ',
+                    'years' => range((int) date('Y') + 10, (int) date('Y') + 20)
+                ]
             )
             ->add('description',
                 TextareaType::class,
