@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -39,21 +40,30 @@ class Commande
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Sejour", inversedBy="commandes")
-     * @ORM\JoinColumn(nullable=false)
+     *
      */
     private $sejour;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\TypeHebergement", inversedBy="commandes")
-     * @ORM\JoinColumn(nullable=false)
+     *
      */
     private $type_hebergement;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Hebergement", inversedBy="commandes")
-     * @ORM\JoinColumn(nullable=false)
+     *
      */
     private $hebergement;
+
+    public function __construct()
+    {
+/*        $this->commandes = new ArrayCollection();
+        $this->comments = new ArrayCollection();*/
+        $this->date_commande = new \DateTime();
+        $this->prix_final = 1000; // optionnel
+        $this->nbre_personne = 10; // en attente de suppression
+    }
 
     public function getId(): ?int
     {

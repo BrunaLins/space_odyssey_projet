@@ -60,10 +60,11 @@
                         {% for commande in commandes %}
                             <tr>
                                 <td>{{ commande.id }}</td>
-                                <td>{{ commande.dateCommande|date('m/Y') }}</td>
+                                <td>{{ commande.dateCommande|date('d/m/Y') }}</td>
                                 <td>{{ commande.nbrePersonne }}</td>
-                                <td>{{ commande.prixFinal }}</td>
+                                <td id="infoprix">{{ commande.prixFinal }}</td>
                             </tr>
+
                         {% endfor %}
                     {% endif %}
                     </tbody>
@@ -73,5 +74,7 @@
 
 
     {% endif %}
+
+
 
 {% endblock %}

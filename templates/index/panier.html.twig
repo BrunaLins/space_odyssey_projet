@@ -5,11 +5,9 @@
     <div class="panier">
 
         {% if app.user %}
-
-            <h1  class="centre">mon panier</h1>
+            <h1 class="centre">Mon panier</h1>
 
             {% if sjrs|length > 0  %}
-
 
                 <table class="content-table">
                     <thead>
@@ -28,14 +26,22 @@
                         <tr class="active-row">
                             <td>{{ sjr.sejour.titre }}</td>
                             <td>{{ sjr.sejour.prixSejour|number_format(2, ",", ".") }}</td>
-                            <td>{{ sjr.quantite }}</td>
+                            <td>
+                                <a href="{{ path('app_index_retire',{'id': sjr.sejour.id}) }}">
+                                    <i class="text-info fas fa-minus-square"></i>
+                                </a>
+                                {{ sjr.quantite }}
+                                <a href="{{ path('app_index_add',{'id': sjr.sejour.id}) }}">
+                                    <i class="text-info fas fa-plus-square"></i>
+                                </a>
+                            </td>
                             {% if sjr.sejour.promo <= 0 %}
                                 <td></td>
                             {% else %}
                                 <td>{{ sjr.sejour.promo }}%</td>
                             {% endif %}
                             <td>{{ ((sjr.sejour.prixSejour * sjr.quantite)* (sjr.sejour.promo)/100)|number_format(2, ",", ".") }}</td>
-                            <td>{{ (sjr.sejour.prixSejour * sjr.quantite)|number_format(2, ",", ".") }}</td>
+                            <td>{{ ((sjr.sejour.prixSejour * sjr.quantite) - ((sjr.sejour.prixSejour * sjr.quantite)* (sjr.sejour.promo)/100))|number_format(2, ",", ".")}}</td>
                             <td>
                                 <a href="{{ path('app_index_supprimersejour',{'id':sjr.sejour.id}) }}">
                                     <i class="fas fa-trash" style="color: red"></i>
@@ -55,13 +61,13 @@
                 </table>
 
                 <div class="paiement">
-                    <a href="#" class="payer"><i class="fab fa-amazon-pay"></i>
+                    <a href="{{ path('app_commande_passecommande')}}" class="payer">
                         Payer
                     </a>
                 </div>
 
             {% else %}
-                <p>Votre panier ets vide</p>
+                <p>Votre panier est vide</p>
             {% endif %}
 
         {% else %}
@@ -75,6 +81,5 @@
         {% endif %}
 
     </div>
-
 
 {% endblock %}

@@ -125,18 +125,20 @@ class IndexController extends AbstractController
             $promosjr= ($sjr['sejour']->getPrixSejour() *$sjr['quantite'])*(($sjr['sejour']->getPromo())/100);
             $promo += $promosjr;
         }
+        // calcul du prix total par sejour
+        /*foreach ($panierPlein as $sjr){
+            $totalsjr = ($totalsjr - $promosjr) ;
+        }*/
+
         // calcul du prix total du séjour après promo
         $total = $total - $promo;
-
 
         return $this->render('index/panier.html.twig',
             ['sjrs'=>$panierPlein,'total'=>$total]);
     }
 
-
-
     /**
-     * Ajoute de sejour dans le panier
+     * Ajout quantité sejour dans le panier
      * @Route("/panier/add/{id}")
      */
     public function add(SessionInterface $session,$id)
@@ -153,6 +155,27 @@ class IndexController extends AbstractController
         return $this->redirectToRoute('app_index_panier');
     }
 
+
+    /**
+     * Retire quantité sejour dans le panier
+     * @Route("/panier/retire/{id}")
+     */
+    public function retire(SessionInterface $session,$id)
+    {
+        $panier = $session->get('panier',[]);
+        //décrementation du séjour dans le panier
+        if (!empty($panier[$id])){
+            $panier[$id]--;
+        }else{
+            $panier[$id]=1;
+        }
+        $session->set('panier',$panier);
+        // dump($session);
+
+        return $this->redirectToRoute('app_index_panier');
+    }
+
+
     /**
      * Supprimer un produit du panier
      * @Route("/panier/supprimer/{id}")
@@ -168,6 +191,11 @@ class IndexController extends AbstractController
         $session->set('panier',$panier);
         return $this->redirectToRoute('app_index_panier');
     }
+
+
+
+
+
 
 
 }

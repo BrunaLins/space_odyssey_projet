@@ -94,10 +94,10 @@ dump($search);
             ;
         }
 
-        if (!empty($search['moisDepart'])) {
+        if (!empty($search['mois_depart'])) {
             $qb
-                ->andWhere('s.mois_depart = :moisDepart')
-                ->setParameter('moisDepart', $search['moisDepart'])
+                ->andWhere('s.mois_depart = :mois_depart')
+                ->setParameter('mois_depart', $search['mois_depart'])
             ;
         }
 
