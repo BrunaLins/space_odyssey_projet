@@ -66,7 +66,7 @@ class SearchType extends AbstractType
                 ]
             )
 
-            ->add('moisDepart',DateType::class,
+       /*     ->add('moisDepart',DateType::class,
                 [
                     'label'=>'Mois de départ',
                     'required'=>false,
@@ -77,7 +77,7 @@ class SearchType extends AbstractType
                         'class' => 'label_search'
                     ]
                 ]
-            )
+            )*/
 
         ;
     }

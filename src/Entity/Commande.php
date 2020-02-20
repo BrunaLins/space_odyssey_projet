@@ -61,6 +61,7 @@ class Commande
 /*        $this->commandes = new ArrayCollection();
         $this->comments = new ArrayCollection();*/
         $this->date_commande = new \DateTime('+10years');
+        $this->nbre_personne= 0;
     }
 
     public function getId(): ?int
