@@ -64,12 +64,14 @@
         {% else %}
             {% if (app.user.premium) %}
                 {{ render(controller('App\\Controller\\DestinationController::menupremium')) }}
+
+               {# <video autoplay muted id="myVideo">
+                    <source src="asset/video/videoproxima.mp4" type="video/mp4">
+                </video>#}
             {% endif %}
         {% endif %}
 
-        <!-- <video autoplay muted loop id="myVideo">
-             <source src="asset/myvideo.mp4" type="video/mp4">
-         </video>-->
+
 
         <ul>
 
@@ -83,15 +85,16 @@
             {% else %}
                 <li class="">
                     {% if (app.user.premium) %}
-                        <span style="color: gold">  {{ app.user }} </span>
+                        <span style="color: gold">
+                            <a href="{{ path('app_user_profil') }}" class="text-warning"> {{ app.user }} <i class="fas fa-users"></i></a>
+                        </span>
                     {% else %}
-                        <span style="color: white">  {{ app.user }} </span>
+                        <span style="color: white">
+                            <a href="{{ path('app_user_profil') }}" class=""> {{ app.user }} <i class="fas fa-users"></i></a>
+                        </span>
                     {% endif %}
                 </li>
                 <li>
-                    <a href="{{ path('app_user_profil') }}" class="">
-                        <i class="fas fa-users"></i>Mon profil
-                    </a>
                     <a href="{{ path('app_user_logout') }}" class="">Déconnexion</a>
                 </li>
             {% endif %}

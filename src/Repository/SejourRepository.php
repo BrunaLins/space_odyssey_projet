@@ -121,6 +121,8 @@ dump($search);
 
             $qb->addOrderBy('s.mois_depart', 'ASC')
         ;
+            // on ne remonte que les 6 premiers resultats
+            $qb->setMaxResults(6);
 
         return $qb->getQuery()->getResult();
     }

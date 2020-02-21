@@ -4,74 +4,57 @@
     <h2>Nos Séjours</h2>
     <br>
     <br>
-    <div>
-        <table>
-            {% for sejour in sejours %}
-                <tr>
-                    <td>
-                        {% if sejour.image1 is not null %}
-                            <div>
-                                <img src="{{ asset('images/' ~ sejour.image1) }}" width="20%">
-                            </div>
-                        {% endif %}
-                    </td>
-                </tr>
-                <tr>
-                    {% if sejour.promo %}
-                        <td style="color: red; font-size: 1.2rem;">Promo !
-                            <a href="{{ path('app_sejour_index', {'id': sejour.id}) }}">{{ sejour.titre }}</a>
-                            <span style="color: black">Depart en : {{ sejour.moisDepart|date('m/Y') }}</span>
-                        </td>
-                    {% else %}
-                        <td> <a href="{{ path('app_sejour_index', {'id': sejour.id}) }}">{{ sejour.titre }}</a>
-                            <span>Depart en :  {{ sejour.moisDepart|date('m/Y') }}</span>
-                        </td>
-                    {% endif %}
-                    <td>{{ sejour.description }}</td>
-                    <td>{{ sejour.dureedata }}</td>
-                </tr>
-                <tr>
-                    <td>
-                        <a href="{{ path('app_index_add',{'id': sejour.id}) }}">
-                            <i class="fas fa-shopping-cart mr-1"></i>
-                            Réserver
-                        </a>
-                    </td>
+    <div class="container-card">
 
-                </tr>
-            {% endfor %}
-        </table>
+        {% for sejour in sejours %}
+        <div class="card" style="width: 18rem;">
+            {% if sejour.image1 is not null %}
+            <img class="card-img-top" src="{{ asset('images/' ~ sejour.image1) }}" alt="Card image cap">
+            {% endif %}
+            <div class="card-body">
+                {% if sejour.promo %}
+                <h5 class="card-title">Promo : <a href="{{ path('app_sejour_index', {'id': sejour.id}) }}">{{ sejour.titre }}</a></h5>
+                {% else %}
+                <h5 class="card-title"><a href="{{ path('app_sejour_index', {'id': sejour.id}) }}">{{ sejour.titre }}}</a></h5>
+                {% endif %}
+                <p class="card-text"><span>Départ en : {{ sejour.moisDepart|date('m/Y') }}</span></p>
+                <p class="card-text">{{ sejour.description }}</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Départ en : {{ sejour.moisDepart|date('m/Y') }}</li>
+                <li class="list-group-item">Prix du séjour : {{ sejour.prixSejour }}</li>
+            </ul>
+            <div class="card-body">
+                <a href="{{ path('app_index_add',{'id': sejour.id}) }}" class="card-link"> <i class="fas fa-shopping-cart mr-1"></i>
+                    Réserver</a>
+            </div>
+        </div>
+        {% endfor %}
     </div>
 
-    <div class="list-group list-group-flush">
-        {% for sejour in best_sejours %}
-            <a class="list-group-item"
-               href="{{ path('app_sejour_index', {'id': sejour.id}) }}">
-                {{ sejour.titre }} :
-                {{ sejour.moyenne }}
-            </a><br>
-        {% else %}
-        {% endfor %}
+    {# 5 meilleurs séjours classés par notes moyennes #}
+    <div>
+        <ul class="list-group">
+            {% for sejour in best_sejours %}
+                <li class="list-group-item"> <a href="{{ path('app_sejour_index', {'id': sejour.id}) }}"> {{ sejour.titre }} </a> : {{ sejour.moyenne | number_format(1, '.', ',')}}</li>
+            {% else %}
+                toto
+            {% endfor %}
+        </ul>
     </div>
 
     {# liste des commentaires du carrousel #}
-    <table>
-        {% for comment in comments %}
-            <tr>
-                <td>{{ comment.contenu }}</td>
-                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                <td>{{ comment.note }}</td>
-            </tr>
-        {% endfor %}
-    </table>
+    <div class="carousel-item">
+        <div class="carousel-caption d-none d-md-block">
+            {% for comment in comments %}
+            <h5 style="color: black;">{{ comment.note|number_format(1, '.', ',') }}</h5>
+            <p>{{ comment.contenu }}</p>
+            {% endfor %}
+        </div>
+    </div>
 
-
-
-    <br>
-    <br>
     {# Creation du formulaire#}
-
-    <div class="jumbotron bg-dark" style="color: white">
+    <div class="jumbotron bg-dark container_search" style="color: white">
         <h4 class="text-center">Votre recherche</h4>
         <div class="container">
             {{ form_start(form) }}

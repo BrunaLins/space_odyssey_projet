@@ -93,30 +93,72 @@ class UserController extends AbstractController
     /**
      *@Route("/update")
      */
-    public function update(Request $request,EntityManagerInterface $manager)
+    public function update(Request $request, EntityManagerInterface $manager,  UserPasswordEncoderInterface $passwordEncoder)
     {
 
         $user = $this->getUser();
+        /*$password = $user->getPassword();
+        $user->setPassword($password);*/
+        // dd($user); Comment renvoyer le password?
 
         $form = $this->createForm(UpdateType::class,$user);
         $form->handleRequest($request);
 
-        if($form->isSubmitted()){
-            if($form->isValid()){
+        if ($form->isSubmitted()) {
+
+            if ($form->isValid()) {
+
+                $encodePassword = $passwordEncoder->encodePassword(
+                    $user,
+                    $user->getPlainPassword()
+                );
+                $user->setPassword($encodePassword);
                 $manager->persist($user);
                 $manager->flush();
-                $this->addFlash('success',
-                    'Profil mise à jour');
-                return $this->redirectToRoute('app_user_profil');
-        }else{
-            $this->addFlash('error',
-                'Le formulaire contient des erreurs');
+                $this->addFlash('success', 'Votre compte est mis à jour');
+                return $this->redirectToRoute('app_index_index');
+            } else {
+                $this->addFlash('error', 'Le formulaire contient des erreurs');
             }
         }
 
         return $this->render('user/update.html.twig',
             ['form'=>$form->createView()]);
     }
+
+
+
+
+    /**
+     * @Route("/edition/{id}", defaults={"id":null}, requirements={"id": "\d+"})
+     */
+    public function edit(Request $request, EntityManagerInterface $manager, $id)
+    {
+
+
+            $sejour = $manager->find(Sejour::class, $id);
+
+
+        $form = $this->createForm(SejourType::class, $sejour);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted()) {
+            if($form->isValid()) {
+                $manager->persist($sejour);
+                $manager->flush();
+                $this->addFlash('success', 'Le séjour est enregistré');
+                return $this->redirectToRoute('app_admin_sejour_index');
+            } else {
+                $this->addFlash('error', 'Le formulaire contient des erreurs');
+            }
+        }
+
+        return $this->render(
+            'admin/sejour/edit.html.twig',
+            ['form' => $form->createView()]
+        );
+    }
+
 
 
 

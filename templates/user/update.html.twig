@@ -13,7 +13,15 @@
     {{ form_row(form.adresse) }}
     {{ form_row(form.ville) }}
     {{ form_row(form.pays) }}
-    <button type="submit">Enregistrer</button>
+    {{ form_row(form.plainPassword) }}
+    <div class="text-right">
+        <button type="submit" class="btn btn-primary">
+            Enregistrer
+        </button>
+        <a href="{{ path('app_commande_index') }}" class="btn btn-outline-secondary">
+            Retour
+        </a>
+    </div>
     {{ form_end(form) }}
 
 {% endblock %}

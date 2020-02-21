@@ -99,7 +99,7 @@ class IndexController extends AbstractController
      * Creation du panier
      * @Route("/panier")
      */
-    public function panier(SessionInterface $session,SejourRepository $sejourRepository)
+    public function panier(SessionInterface $session, SejourRepository $sejourRepository)
     {
         $panier = $session->get('panier',[]);
 

@@ -75,7 +75,11 @@ h2 {
     flex-wrap: wrap;
     justify-content: space-around;
 }
-
+.flex__center{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
 
 .container-fluid {
     width: 100%;
@@ -114,14 +118,15 @@ h2 {
 
 
 nav {
-
+    /* z index au dessus de tout */
+    z-index: 100;
     position: fixed;
     width: 100%;
     background: rgba(0, 0, 0, 0.5) ;
     box-shadow: black 0px 10px 50px;
 
 }
-nav>ul{
+nav>.ul{
     width: 80%;
     margin: 0 auto;
     padding: 0;
@@ -135,7 +140,7 @@ nav> ul li{
 nav> ul li:hover{
 
     background: rgba(92, 90, 90, 0.7);
-    border-radius: 20px;
+    border-radius: 5px;
 }
 
 nav> ul li a {
@@ -150,6 +155,7 @@ nav> ul li a {
     background: #001f44;
     text-align: right;
     box-sizing: border-box;
+    max-width: 50px;
     color: #fff;
     font-size: 30px;
     display: none;
@@ -172,6 +178,12 @@ nav> ul li a {
         display: block;
     }
 }
+.logo_spaceOdyssey{
+
+    max-width: 90px;
+    max-height: 80px;
+}
+
 
 /* -------------    bandeau video    -------------------------------  */
 
@@ -222,13 +234,20 @@ video {
     margin: 10px 2px 10px 2px;
     border-radius: 10px;
     box-shadow: black 2px 2px 10px;
+    position: relative;
+}
+.card figure{
+    margin: 0;
 }
 
 .card figure > img {
     width: 100%;
 }
 
-figure {
+.bg__bonsplans {
+    background-image: url("../img/bg_card.png");
+    background-size: cover;
+    background-repeat: no-repeat;
 
     margin: 0;
 }
@@ -255,16 +274,50 @@ figure {
     margin-left: 250px;
     margin-top: 10px;
 }
+.card_sejour{
+    min-height: 200px;
 
+}
 
+.pos_sticker{
+    /*position: relative;*/
 
+}
+
+/* texte promotion dans les card */
+.promo{
+    padding: 5px;
+    font-size: 1rem;
+    color: black;
+
+}
+/* sticker promo */
+.sticker{
+    position: absolute;
+    top: 10px;
+    left: -8px;
+    width: 30%;
+    background: gold;
+    border-radius: 5px;
+    box-shadow: 1px 1px 20px;
+}
+.btn__sticker{
+    position: absolute;
+    bottom: 10px;
+    right: 0px;
+}
+/* p description */
+.description_sejour{
+    margin-top: 5px;
+    font-size: 0.75rem;
+}
 /* ------------------------------------ formulaire recherche ------------------------------------- */
 
 .separation{
 
-    /*position:relative;*/
+    position:relative;
     display: flex;
-    flex-wrap: wrap;
+    /*flex-wrap: wrap;*/
     justify-content: center;
     top: -85px;
 }
@@ -276,9 +329,18 @@ figure {
     border-radius: 4px;
     background: rgba(33, 33, 27, 0.64);
     color: white;
+    margin-right: 15px;
+    padding: 5px;
 }
 
-
+.container_search {
+    align-items: center;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
 
 /*.containerGlob{*/
 
@@ -287,16 +349,17 @@ figure {
 /*    top: 200px;*/
 
 .containerForm{
-    max-width: 75%;
+    max-width: 100%;
     /*left: 25%;*/
     top:20%;
     background-color: rgba(202, 197, 192, 0.5);
-    padding: 10px;
+
     border-radius: 6px;
 
 }
-button[type=submit] {
-    background-color: green;
+.jc_button button[type=submit] {
+    background-color: #1b1a19;
+    /*background-color: green;*/
     color: white;
     padding: 5px;
     border: none;
@@ -305,8 +368,9 @@ button[type=submit] {
     text-align: center;
     margin: 0 10px 0 10px;
 }
-button[type=submit]:hover {
-    background-color: #5166ff;
+.jc_button button[type=submit]:hover {
+    background-color: rgba(36, 107, 141, 0.87);
+    /*background-color: #5166ff;*/
 }
 .select_search{
     text-align: center;
@@ -315,14 +379,47 @@ button[type=submit]:hover {
     border: black;
     padding: 5px 0 5px 0;
     margin: 2px;
+
     background-color: rgba(29, 28, 27, 0.89);
+}
+.bg_recherche{
+
+    /*background-color: black;*/
 }
 
 
+/* ------------------------------- formulaire register ---------------- */
 
+.form_register{
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 5px;
+    margin-right: 0px;
+    margin-left: 0px;
+    resize: vertical;
+}
 
+.containerFormRegister {
+    max-width:100%;
+    /*left: 25%;*/
+    top: 20%;
+    background-color: rgba(202, 197, 192, 0.5);
+    padding: 30px;
+    border-radius: 6px;
+}
+.marginRegister {
+    margin-bottom: 20px;
+}
 
 /* ----------------------------- titre ---------------------------- */
+
+.titre {
+
+}
 
 .titre h1 {
     text-align: center;
@@ -336,9 +433,14 @@ button[type=submit]:hover {
 
 
 .bg__bonsplans{
-    background-color: rgba(255, 239, 213, 0.294);
-
+    /*background-image: url("../img/bg_banner1.jpg");*/
+    /*background-repeat: no-repeat;*/
+    /*background-size: cover;*/
 }
+.container_img{
+    width: 100%;
+}
+
 /* ----------------------------------------------  carousel  commentaire  ---------------------------------------------- */
 .carou{
     margin-top: 50px;
@@ -408,7 +510,7 @@ button[type=submit]:hover {
     text-align: center;
     bottom: 1em;
     position: absolute;
-    width: 104px;
+    width: 114px;
     left: 50%;
     margin-left: -52px;
 }
@@ -433,13 +535,26 @@ button[type=submit]:hover {
 #radio-2:checked ~ .slides {
     transform: translateX(-25%);
 }
+#radio-3:checked ~ .slides {
+    transform: translateX(-50%);
+}
+#radio-4:checked ~ .slides {
+    transform: translateX(-75%);
+}
+#radio-5:checked ~ .slides {
+    transform: translateX(-100%);
+}
 
 .carousel .slidesNavigation label:hover {
     cursor: pointer;
 }
 
 .carousel #radio-1:checked ~ .slidesNavigation label#dotForRadio-1,
-.carousel #radio-2:checked ~ .slidesNavigation label#dotForRadio-2 {
+.carousel #radio-2:checked ~ .slidesNavigation label#dotForRadio-2,
+.carousel #radio-3:checked ~ .slidesNavigation label#dotForRadio-3,
+.carousel #radio-4:checked ~ .slidesNavigation label#dotForRadio-4,
+.carousel #radio-5:checked ~ .slidesNavigation label#dotForRadio-5
+{
     background: #13191d83;
 }
 
@@ -457,6 +572,11 @@ button[type=submit]:hover {
     list-style: none;
 
 }
+.footer_bg div>ul{
+    padding: 0;
+}
+
+
 .footer_bg div ul>li{
     list-style: none;
     color: #bbbbbb;
@@ -468,9 +588,48 @@ button[type=submit]:hover {
     text-align: center;
 }
 
+/* ---------------------  sejour ----------------------------------------- */
+.sejour{
+    margin-bottom: 20px ;
+
+    border-radius: 12px;
+    box-shadow: black 2px 2px 12px;
+}
+.sejour button{
+    margin-bottom: 5px ;
+}
+/* --------------------- banner_ico ----------------------- */
+.bg_banner_ico{
+    /*background-color: rgba(210, 117, 4, 0.34);*/
+    padding: 10px 0 10px 0;
+    margin: 0;
+
+}
+.fa-medal,
+.fa-reddit-alien,
+.fa-comments,
+.fa-grin,
+.fa-scroll
+{
+    color: #d6c59f;
+    font-size: 3rem;
+    margin: 0 20px 0 20px;
+}
 
 
-/* test */
+
+.banner_ico{
+    max-width: 100px;
+    line-height: 1;
+}
+
+.banner_ico a{
+    font-size: 0.75rem;
+
+}
+
+
+/* ---------------------- test------------------------------- */
 
 .cadre{
     border: red 2px solid;
@@ -507,7 +666,8 @@ button[type=submit]:hover {
     padding-left: 10px;
     background-color: ivory;
     margin-left: 50px;
-    margin-top: 50px;
+    margin-top: 40px;
+    margin-bottom: 10px;
     width: 980px;
     display: flex;
     justify-content: space-between;
@@ -605,13 +765,58 @@ button[type=submit]:hover {
 
 .user_info{
     width: 50%;
-    min-height: 200px;
+    height: 300px;
     padding: 10px;
 }
 
 .user_info h5{
     text-align: center;
 }
+
+/*----------------------formulaire connextion------------------------------*/
+
+
+.label_connexion{
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 5px;
+    margin-right: 0px;
+    margin-left: 0px;
+    resize: vertical;
+}
+
+.Form_connexion{
+
+
+    max-width:100%;
+    /*left: 25%;*/
+    top: 20%;
+    background-color: rgba(202, 197, 192, 0.5);
+    padding: 30px;
+    border-radius: 6px;
+}
+.marginRegister {
+    margin-bottom: 20px;
+}
+
+/* --------------- form connexion ---------- */
+.connexion_jc{
+    margin-bottom: 10px;
+    border: rgba(0, 0, 0, 0.24) 2px solid;
+    border-radius: 5px;
+    padding: 5px;
+    max-width: 400px;
+}
+/* ------------------ message_alerte --------- */
+
+
+
+
+
 
 /*----------------------formulaire connextion------------------------------*/
 
@@ -710,7 +915,6 @@ button[type=submit]:hover {
 .paiement{
     display: flex;
     justify-content: center;
-    margin-left: 400px;
 }
 
 a.payer {

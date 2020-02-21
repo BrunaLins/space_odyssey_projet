@@ -56,21 +56,17 @@ class CommandeController extends AbstractController
                 $remise = $prix * ($sejour->getPromo() / 100);
                 $prix -= $remise;
             }
-
             $prixTotal += $prix;
         }
 
         $commande
             ->setPrixFinal($prixTotal);
 
-
         $manager->persist($commande);
         $manager->flush();
+
         $this->addFlash('success', 'La commande est passée');
-
-
-
-        // il faut vider le panier et envoyer mail
+        $session->clear();
 
        return $this->redirectToRoute('app_commande_index');
     }

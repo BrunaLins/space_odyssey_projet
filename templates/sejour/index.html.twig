@@ -18,13 +18,23 @@
         <p><em>Mois de départ : {{ sejour.moisDepart|date('m/Y') }}</em></p>
         <p><em>Durée du séjour : {{ sejour.dureedata }}</em></p>
         <p>{{ sejour.description|nl2br }}</p>
-        {% if sejour.image2 %}
-        <div>
-            <img src="{{ asset('images/' ~ sejour.image2) }}">
-        </div>
+        {% if sejour.descriptionDetail %}
+            <div>
+                <p>{{ sejour.descriptionDetail|nl2br }}
+                    {% if sejour.image2 %}
+                        <span>
+                        <img src="{{ asset('images/' ~ sejour.image2) }}">
+                    </span>
+                    {% endif %}
+                </p>
+
+            </div>
         {% endif %}
         <div class="text-right">
-            <button type="submit" class="">Réserver</button>
+            <a href="{{ path('app_index_add',{'id': sejour.id}) }}">
+                    <i class="fas fa-shopping-cart mr-1"></i>
+                    Réserver
+                </a>
         </div>
         <br>
     </div>

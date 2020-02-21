@@ -40,7 +40,7 @@ class SejourController extends AbstractController
 
                 $manager->persist($comment);
                 $manager->flush();
-                $this->addFlash('success', 'vote commentaire est enregistré');
+                $this->addFlash('success', 'Votre commentaire est enregistré');
                 return $this->redirectToRoute('app_sejour_index', ['id' => $sejour->getId()]);
 
             } else {

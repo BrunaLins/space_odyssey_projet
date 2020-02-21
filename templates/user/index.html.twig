@@ -22,8 +22,8 @@
 
         <div class="profil">
             <div class="user_info">
-                <h5>Mes informations</h5>
-                <p><strong>Civilité : </strong><em>{{ app.user.civilite }}</em></p>
+                <h5>Indentité</h5>
+                <p><strong>Civilité : </strong>{{ app.user.civilite }}</p>
                 <p><strong>Nom : </strong>{{ app.user.nom|upper }}</p>
                 <p><strong>Prénom : </strong>{{ app.user.prenom|capitalize }}</p>
                 <p><strong>E-mail : </strong>{{ app.user.email|lower }}</p>
@@ -51,7 +51,6 @@
                     <tr>
                         <th>Id Commande</th>
                         <th>Date Commande</th>
-                        <th>Nbre de personnes</th>
                         <th>Montant</th>
                     </tr>
                     </thead>
@@ -61,8 +60,7 @@
                             <tr>
                                 <td>{{ commande.id }}</td>
                                 <td>{{ commande.dateCommande|date('d/m/Y') }}</td>
-                                <td>{{ commande.nbrePersonne }}</td>
-                                <td id="infoprix">{{ commande.prixFinal }}</td>
+                                <td>{{ commande.prixFinal }}</td>
                             </tr>
 
                         {% endfor %}

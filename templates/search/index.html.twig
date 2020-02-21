@@ -14,32 +14,29 @@
 
                 {% if key.promo is null %}
                 {% else %}
-                    <p class="promo">Offre spéciale :  {{ key.promo }} % </p>
+                    <p class="promo">Offre spéciale : {{ key.promo }} % </p>
                 {% endif %}
 
                 <div class="description">
-                    <strong>Départ prévu le <em>{{ key.moisdepart|date('d/m/Y')}}</em></strong>
+                    <strong>Départ prévu le : {{ key.moisdepart|date('m/Y') }}</strong>
                     <p><strong>Détail :</strong> {{ key.description }}</p>
                 </div>
                 <div class="detail_voyage">
                     <div class="detail">
+                        <p><strong>Prix : </strong>{{ key.prixsejour|number_format(2, ",", ".") }} €</p>
                         <p><strong>Durée : </strong>{{ key.dureedata }}</p>
                         <p><strong>Destination : </strong>{{ key.destination }}</p>
-                        <p><strong>Hebergement: </strong>{{ key.typehebergement}}</p>
-                    </div>
-                    <div class="prix_sejour">
-                        <div class="care">
-                            <p>{{ key.prixsejour|number_format(2, ",", ".")}} €</p>
-                        </div>
+                        <p><strong>Hébergement: </strong>{{ key.typehebergement }}</p>
                     </div>
                 </div>
                 <div class="validate">
-                    <button type="submit" class="validate_btn">Reserver ce séjour</button>
+                    <a href="{{ path('app_index_add',{'id': key.id}) }}">
+                        <i class="fas fa-shopping-cart mr-1"></i>
+                        Réserver ce séjour
+                    </a>
                 </div>
 
-
             </div>
-
             <div class="image">
                 <img src="{{ asset('images/' ~key.image1) }}" alt="" width="100%" height="100%">
             </div>

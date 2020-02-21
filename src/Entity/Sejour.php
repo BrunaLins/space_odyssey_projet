@@ -44,17 +44,21 @@ class Sejour
     /**
      * @ORM\Column(type="string", length=255)
      *
-     * @Assert\Image(mimeTypesMessage="Le fichier doit être une image", maxSize="5M", maxSizeMessage="L'image be doit pas dépasser 5Mo")
+     * @Assert\Image(mimeTypesMessage="Le fichier doit être une image", maxSize="5M", maxSizeMessage="L'image ne doit pas dépasser 5Mo")
      */
     private $image_1;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @Assert\Image(mimeTypesMessage="Le fichier doit être une image", maxSize="5M", maxSizeMessage="L'image ne doit pas dépasser 5Mo")
      */
     private $image_2;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @Assert\Image(mimeTypesMessage="Le fichier doit être une image", maxSize="5M", maxSizeMessage="L'image ne doit pas dépasser 5Mo")
      */
     private $image_3;
 
@@ -108,6 +112,21 @@ class Sejour
      */
     private $moyenne;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $description_detail;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $vedette;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $teleportation;
+
     public function __construct()
     {
         $this->commandes = new ArrayCollection();
@@ -115,7 +134,6 @@ class Sejour
         $this->mois_depart = new \DateTime();
         $this->stock = 1000; // optionnel
         $this->duree = 0; // en attente de suppression
-        $this->prix_sejour = 0; // en attente de suppression
     }
 
     public function getId(): ?int
@@ -362,5 +380,41 @@ class Sejour
         }
 
         return $total / $this->getComments()->count();
+    }
+
+    public function getDescriptionDetail(): ?string
+    {
+        return $this->description_detail;
+    }
+
+    public function setDescriptionDetail(?string $description_detail): self
+    {
+        $this->description_detail = $description_detail;
+
+        return $this;
+    }
+
+    public function getVedette(): ?bool
+    {
+        return $this->vedette;
+    }
+
+    public function setVedette(?bool $vedette): self
+    {
+        $this->vedette = $vedette;
+
+        return $this;
+    }
+
+    public function getTeleportation(): ?bool
+    {
+        return $this->teleportation;
+    }
+
+    public function setTeleportation(?bool $teleportation): self
+    {
+        $this->teleportation = $teleportation;
+
+        return $this;
     }
 }

@@ -8,6 +8,7 @@ use App\Entity\Sejour;
 use App\Entity\TypeHebergement;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -25,6 +26,11 @@ class SejourType extends AbstractType
             ->add('titre',
             TextType::class,
                 ['label' => 'Titre']
+            )
+
+            ->add('prixSejour',
+                IntegerType::class,
+                ['label' => 'Prix du séjour']
             )
             ->add('destination',
                 EntityType::class,
@@ -61,6 +67,10 @@ class SejourType extends AbstractType
                 TextareaType::class,
                 ['label' => 'Description']
             )
+            ->add('description_detail',
+                TextareaType::class,
+                ['label' => 'Description Détaillée']
+            )
             ->add('promo',
                 IntegerType::class,
                 ['label' => 'Promo',
@@ -76,6 +86,21 @@ class SejourType extends AbstractType
                 ['label' => 'Image 2',
                     'required' => false]
             )
+            ->add('vedette',ChoiceType::class,
+                ['label'=>'En Vedette',
+                    'choices' => [
+                        '0' => '0',
+                        '1' =>'1'
+                    ]
+                ])
+
+            ->add('teleportation',ChoiceType::class,
+                ['label'=>'Teleportation',
+                    'choices' => [
+                        '0' => '0',
+                        '1' =>'1'
+                    ]
+                ])
          /*   ->add('stock',
                 IntegerType::class,
                 ['label' => 'Nombre de places restantes']
