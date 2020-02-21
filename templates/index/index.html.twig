@@ -1,85 +1,173 @@
 {% extends 'base.html.twig' %}
 {% block body %}
 
-    <h2>Nos Séjours</h2>
-    <br>
-    <br>
-    <div class="container-card">
+    {#        <!-- ------------------------- bando video ---------------- -->#}
 
-        {% for sejour in sejours %}
-        <div class="card" style="width: 18rem;">
-            {% if sejour.image1 is not null %}
-            <img class="card-img-top" src="{{ asset('images/' ~ sejour.image1) }}" alt="Card image cap">
-            {% endif %}
-            <div class="card-body">
-                {% if sejour.promo %}
-                <h5 class="card-title">Promo : <a href="{{ path('app_sejour_index', {'id': sejour.id}) }}">{{ sejour.titre }}</a></h5>
-                {% else %}
-                <h5 class="card-title"><a href="{{ path('app_sejour_index', {'id': sejour.id}) }}">{{ sejour.titre }}}</a></h5>
-                {% endif %}
-                <p class="card-text"><span>Départ en : {{ sejour.moisDepart|date('m/Y') }}</span></p>
-                <p class="card-text">{{ sejour.description }}</p>
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">Départ en : {{ sejour.moisDepart|date('m/Y') }}</li>
-                <li class="list-group-item">Prix du séjour : {{ sejour.prixSejour }}</li>
-            </ul>
-            <div class="card-body">
-                <a href="{{ path('app_index_add',{'id': sejour.id}) }}" class="card-link"> <i class="fas fa-shopping-cart mr-1"></i>
-                    Réserver</a>
-            </div>
-        </div>
-        {% endfor %}
+
+    <div class="bg__video">
+
+        <video class="banner__video"
+               src="{{ asset('asset/video/myvideo.mp4') }}" autoplay playsinline muted>
+            space odyssey
+        </video>
     </div>
 
-    {# 5 meilleurs séjours classés par notes moyennes #}
-    <div>
-        <ul class="list-group">
-            {% for sejour in best_sejours %}
-                <li class="list-group-item"> <a href="{{ path('app_sejour_index', {'id': sejour.id}) }}"> {{ sejour.titre }} </a> : {{ sejour.moyenne | number_format(1, '.', ',')}}</li>
-            {% else %}
-                toto
-            {% endfor %}
-        </ul>
-    </div>
 
-    {# liste des commentaires du carrousel #}
-    <div class="carousel-item">
-        <div class="carousel-caption d-none d-md-block">
-            {% for comment in comments %}
-            <h5 style="color: black;">{{ comment.note|number_format(1, '.', ',') }}</h5>
-            <p>{{ comment.contenu }}</p>
-            {% endfor %}
-        </div>
-    </div>
 
-    {# Creation du formulaire#}
-    <div class="jumbotron bg-dark container_search" style="color: white">
-        <h4 class="text-center">Votre recherche</h4>
+
+
+
+    {# -------------------------------------    recherche      ------------------------------------------------------ #}
+    <div class="bg_recherche">
+
         <div class="container">
             {{ form_start(form) }}
-            <div class="row">
-                <div class="col">
-                    {{ form_row(form.destination) }}
+            <div class="separation containerForm ">
+
+                {{ form_row(form.destination) }}
+                {{ form_row(form.typeHebergement) }}
+                {{ form_row(form.duree) }}
+                <div class="jc_button">
+                    <button  type="submit" name="recherche"><i class="fas fa-search"></i>
+                        Je recherche
+                    </button>
                 </div>
-                <div class="col">
-                    {{ form_row(form.typeHebergement) }}
-                </div>
+                {{ form_end(form) }}
             </div>
-            <div class="row">
-                <div class="col">
-                    {{ form_row(form.duree) }}
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <button class="btn btn-info">Rechercher</button>
-                </div>
-            </div>
-            {{ form_end(form) }}
+
+        </div>
+
+    </div>
+
+
+
+    <div>
+        <div class="titre_jc flex__center" >
+            <h2>Découvrez notre galaxie et plus si affinités</h2>
+        </div>
+
+        {#    <!-- ----------------------------------- destination mise en avant -------------------------------- -->#}
+
+        <div class="container bonsplans">
+            <figure>
+                <a href=""><img class="container_img" src="{{ asset('asset/img/bando1.jpg') }}" alt=""></a>
+                <figcaption></figcaption>
+            </figure>
         </div>
     </div>
-    {# Fin Creation du formulaire#}
+
+
+    {#    <!-- ----------------------------------- nos meilleurs vente -------------------------------- -->#}
+
+    <div class="titre_jc" >
+        <h2><i class="fas fa-globe-europe"></i> Les <strong>bons plans</strong> voyage à saisir !</h2>
+        <p>Jetez un œil sur cette sélection de voyages que nos spécialistes vous conseillent tout particulièrement.</p>
+    </div>
+
+
+    {# ------------------------------------------- xavier 5 meilleurs sejours ---------------------- #}
+    <div class="list-group-flush_space">
+        <div class="container list-group-flush">
+            {% for sejour in best_sejours %}
+                <a class="list-group-item" style="text-decoration: none; color: #1b1e21"
+                   href="{{ path('app_sejour_index', {'id': sejour.id}) }}">
+                    {{ sejour.titre }} :
+                    {{ sejour.moyenne | number_format(1, ',', '.') }}
+                </a><br>
+            {% else %}
+            {% endfor %}
+        </div>
+    </div>
+
+
+    {#    <!-- ----------------------------------- titre bons plan -------------------------------- -->#}
+
+    <div class="titre_jc" >
+        <h2><i class="fas fa-rocket"></i> Les <strong>coups de cœur </strong> du moment !</h2>
+        <p>Des départs garantis, des aubaines, des voyages qui partent bientôt avec déjà quelques inscrits... profitez de nos bonnes affaires !</p>
+    </div>
+
+
+
+
+
+
+
+    {#    <!-- ------------------------------- card voyage bons plans ------------------------------- -->#}
+
+    <div class="bg__bonsplans">
+
+        <div class="container-card">
+            {% for sejour in sejours %}
+                <div class="card ">
+                    {% if sejour.image1 is not null %}
+                        <figure>
+                           <img src="{{ asset('images/' ~ sejour.image1) }}" width="20%">
+                            <figcaption> <a class="text-decoration-none" style="color: black" href= "{{ path('app_sejour_index', {'id': sejour.id}) }}">{{ sejour.titre }}</a></figcaption>
+                        </figure>
+                    {% endif %}
+                    <div class="card_sejour">
+                        {% if sejour.promo %}
+                            <div class="pos_sticker">
+                                <div class="sticker" >
+                                    <h2 class="promo">Jusqu'à {{ sejour.promo }} %</h2>
+
+                                </div>
+                            </div>
+                        {% endif %}
+                        <p class="description_sejour">{{ sejour.description }}</p>
+                        <p>Durée du séjour : {{ sejour.dureedata }}</p>
+                        <p>Depart en :  {{ sejour.moisDepart|date('m/Y') }}</p>
+                        <p>Prix :  {{ sejour.prixSejour | number_format(0, ',', '.')}}</p>
+                        <div class="btn__sticker jc_button ">
+                            <a href="{{ path('app_index_add',{'id': sejour.id}) }}">
+                                <i class="fas fa-shopping-cart mr-1"></i>
+                                Réserver
+                            </a>
+                        </div>
+                    </div>
+
+
+                </div>
+            {% endfor %}
+        </div>
+
+    </div>
+
+
+
+
+    {#    <!-- ----------------------------------  "bon" comentaires des clients dans un carousel------------------------------------------------- -->#}
+    <div class="container carou">
+        <div class="carousel">
+            <h2>Ils y sont allés, ils nous en parlent</h2>
+            <p>Rien de tel que les avis de nos clients pour vous éclairer
+                dans votre choix… et nous aider à améliorer nos voyages !</p>
+            <input type="radio" name="slides" id="radio-1" checked>
+            <input type="radio" name="slides" id="radio-2">
+            <input type="radio" name="slides" id="radio-3">
+            <input type="radio" name="slides" id="radio-4">
+            <input type="radio" name="slides" id="radio-5">
+            <ul class="slides">
+                {#                boucle sur les 5 derniers commentaires #}
+                {% for comment in comments %}
+                    <li class="slide">
+                        <p>{{ comment.contenu }}</p>
+                        <p>{{ comment.note|number_format(1, '.', ',') }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+            <div class="slidesNavigation">
+                <label for="radio-1" id="dotForRadio-1"></label>
+                <label for="radio-2" id="dotForRadio-2"></label>
+                <label for="radio-3" id="dotForRadio-3"></label>
+                <label for="radio-4" id="dotForRadio-4"></label>
+                <label for="radio-5" id="dotForRadio-5"></label>
+            </div>
+        </div>
+    </div>
+
+
 
 
 {% endblock %}

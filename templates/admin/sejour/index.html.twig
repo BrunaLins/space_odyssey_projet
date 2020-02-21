@@ -1,55 +1,68 @@
 {% extends 'base.html.twig' %}
 
-{%  block body %}
-    <br>
-    <h2>Gestion Sejours</h2>
-    <br>
+{% block body %}
 
-   <a href="{{ path('app_admin_sejour_edit') }}" class="btn btn-outline-secondary mb-3">
-        Créer un séjour
-    </a>
+    {# ----------------------------------------------- image remplace video --------------------------------------#}
+    <div class="banner_imgFixe">
+        <div class="container ">
+            <img src="{{ asset('asset/img/banner_odyssey.jpg') }}" alt="">
+        </div>
+    </div>
 
-    <table class="table">
-        <tr class="table-dark">
-            <th>Id</th>
-            <th>Titre</th>
-            <th>Prix</th>
-            <th class="w-25">Description</th>
-            <th class="w-25">Description Détaillée</th>
-            <th>Durée</th>
-            <th>Départ</th>
-{#            <th>Places restantes</th>#}
-            <th>Promo</th>
-            <th>En Vedette</th>
-            <th>Teleportation</th>
-            <th></th>
-        </tr>
-        {% for sejour in sejours %}
-            <tr>
-                <td>{{ sejour.id }} </td>
-                <td>{{ sejour.titre }}</td>
-                <td>{{ sejour.prixSejour }}</td>
-                <td>{{ sejour.description }}</td>
-                <td>{{ sejour.descriptionDetail }}</td>
-                <td>{{ sejour.dureedata }}</td>
-                <td>{{ sejour.moisDepart|date('m/Y') }}</td>
-{#                <td>{{ sejour.stock }}</td>#}
-                <td>{{ sejour.promo }}</td>
-                <td>{{ sejour.vedette }}</td>
-                <td>{{ sejour.teleportation }}</td>
-                <td>
-                    <a href="{{ path('app_admin_sejour_edit', {'id': sejour.id}) }}" class="btn btn-secondary">
-                        <i class="fas fa-edit text-warning"></i>
-                    </a>
-                    <a href="{{ path('app_admin_sejour_delete', {'id': sejour.id}) }}" class="btn btn-danger">
-                        <i class="fas fa-trash"></i>
-                    </a>
-                </td>
+
+
+    <div class="container">
+        <br>
+        <h2>Gestion Sejours</h2>
+        <br>
+
+        <a href="{{ path('app_admin_sejour_edit') }}" class="btn btn-outline-secondary mb-3">
+            Créer un séjour
+        </a>
+
+        <table class="table">
+            <tr class="table-dark">
+                <th>Id</th>
+                <th>Titre</th>
+                <th>Prix</th>
+                <th class="w-25">Description</th>
+                <th class="w-25">Description Détaillée</th>
+                <th>Durée</th>
+                <th>Départ</th>
+                {#            <th>Places restantes</th>#}
+                <th>Promo</th>
+                <th>En Vedette</th>
+                <th>Teleportation</th>
+                <th></th>
             </tr>
-        {% else %}
-            <tr>
-                <td colspan="6" class="text-center">Aucun séjour</td>
-            </tr>
-        {% endfor %}
-    </table>
+            {% for sejour in sejours %}
+                <tr>
+                    <td>{{ sejour.id }} </td>
+                    <td>{{ sejour.titre }}</td>
+                    <td>{{ sejour.prixSejour }}</td>
+                    <td>{{ sejour.description }}</td>
+                    <td>{{ sejour.descriptionDetail }}</td>
+                    <td>{{ sejour.dureedata }}</td>
+                    <td>{{ sejour.moisDepart|date('m/Y') }}</td>
+                    {#                <td>{{ sejour.stock }}</td>#}
+                    <td>{{ sejour.promo }}</td>
+                    <td>{{ sejour.vedette }}</td>
+                    <td>{{ sejour.teleportation }}</td>
+                    <td>
+                        <a href="{{ path('app_admin_sejour_edit', {'id': sejour.id}) }}" class="btn btn-secondary">
+                            <i class="fas fa-edit text-warning"></i>
+                        </a>
+                        <a href="{{ path('app_admin_sejour_delete', {'id': sejour.id}) }}" class="btn btn-danger">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6" class="text-center">Aucun séjour</td>
+                </tr>
+            {% endfor %}
+        </table>
+
+    </div>
 {% endblock %}

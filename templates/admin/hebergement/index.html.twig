@@ -1,6 +1,15 @@
 {% extends 'base.html.twig' %}
 
 {%  block body %}
+
+    {# ----------------------------------------------- image remplace video --------------------------------------#}
+    <div class="banner_imgFixe">
+        <div class="container ">
+            <img src="{{ asset('asset/img/banner_odyssey.jpg') }}" alt="">
+        </div>
+    </div>
+
+    <div class="container">
     <br>
     <h2>Gestion Hébergements</h2>
     <br>
@@ -41,4 +50,5 @@
             </tr>
         {% endfor %}
     </table>
+    </div>
 {% endblock %}

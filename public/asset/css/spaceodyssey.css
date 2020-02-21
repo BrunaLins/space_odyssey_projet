@@ -22,6 +22,8 @@ body {
     background-color: rgb(251, 250, 248);
 }
 
+
+
 h2 {
     margin: 0;
 }
@@ -122,7 +124,7 @@ nav {
     z-index: 100;
     position: fixed;
     width: 100%;
-    background: rgba(0, 0, 0, 0.5) ;
+    background: rgba(0, 0, 0, 0.8) ;
     box-shadow: black 0px 10px 50px;
 
 }
@@ -146,9 +148,11 @@ nav> ul li:hover{
 nav> ul li a {
     color: #ced4da;
     text-decoration: none;
-
 }
-
+nav> ul li a:hover {
+    color: #ced4da;
+    text-decoration: none;
+}
 .toggle{
     width: 100%;
     padding: 10px 20px;
@@ -183,7 +187,12 @@ nav> ul li a {
     max-width: 90px;
     max-height: 80px;
 }
+/* ----------------- image remplace video-------------- */
 
+.banner_imgFixe{
+    background: #110602;
+    z-index: -100;
+}
 
 /* -------------    bandeau video    -------------------------------  */
 
@@ -208,7 +217,7 @@ video {
     left: 50%;
     width: auto;
     height: auto;
-    z-index: -100;
+    z-index: -1;
     transform: translateX(-50%);
 }
 
@@ -242,6 +251,7 @@ video {
 
 .card figure > img {
     width: 100%;
+    max-height: 250px;
 }
 
 .bg__bonsplans {
@@ -309,7 +319,6 @@ video {
 /* p description */
 .description_sejour{
     margin-top: 5px;
-    font-size: 0.75rem;
 }
 /* ------------------------------------ formulaire recherche ------------------------------------- */
 
@@ -363,7 +372,7 @@ video {
     color: white;
     padding: 5px;
     border: none;
-    border-radius: 15px;
+    border-radius: 7px;
     cursor: pointer;
     text-align: center;
     margin: 0 10px 0 10px;
@@ -391,7 +400,7 @@ video {
 /* ------------------------------- formulaire register ---------------- */
 
 .form_register{
-    width: 100%;
+    width: 50%;
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -401,6 +410,8 @@ video {
     margin-right: 0px;
     margin-left: 0px;
     resize: vertical;
+    background-color: rgba(204, 182, 160, 0.77);
+
 }
 
 .containerFormRegister {
@@ -417,25 +428,25 @@ video {
 
 /* ----------------------------- titre ---------------------------- */
 
-.titre {
+.titre_jc {
 
 }
 
-.titre h1 {
+.titre_jc h2 {
+    margin-top: 5%;
+
     text-align: center;
 }
 
-.titre h3 {
+.titre_jc p {
     text-align: center;
 }
 
 /* ------------------------------  banner bons_plan -------------------------------------------- */
 
 
-.bg__bonsplans{
-    /*background-image: url("../img/bg_banner1.jpg");*/
-    /*background-repeat: no-repeat;*/
-    /*background-size: cover;*/
+.bonsplans{
+    margin-top: 2%;
 }
 .container_img{
     width: 100%;
@@ -581,11 +592,13 @@ video {
     list-style: none;
     color: #bbbbbb;
     text-align: center;
+    font-size: 0.8rem;
 
 }
 .footer_bg div>h3{
     color: #bbbbbb;
     text-align: center;
+    font-size: 1rem;
 }
 
 /* ---------------------  sejour ----------------------------------------- */
@@ -654,20 +667,29 @@ video {
 /* -----------------------  sejour ----------------------------------------- */
 .sejour{
     margin-bottom: 20px ;
-
+    margin-top: 20px;
     border-radius: 12px;
     box-shadow: black 2px 2px 12px;
 }
 .sejour button{
     margin-bottom: 5px ;
 }
+
+.cadre_sejour{
+    border: rgba(27, 26, 25, 0.5) solid 1px;
+    border-radius:10px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+
 /* -----------------------  CSS ROMUALD ----------------------------------------- */
 .card_show{
     padding-left: 10px;
     background-color: ivory;
     margin-left: 50px;
     margin-top: 40px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     width: 980px;
     display: flex;
     justify-content: space-between;
@@ -703,6 +725,7 @@ video {
 }
 .titre{
     text-align: center;
+    padding-top: 20px;
 }
 .promo{
     color: red;
@@ -798,6 +821,7 @@ video {
     background-color: rgba(202, 197, 192, 0.5);
     padding: 30px;
     border-radius: 6px;
+    margin-bottom:150px;
 }
 .marginRegister {
     margin-bottom: 20px;
@@ -805,7 +829,8 @@ video {
 
 /* --------------- form connexion ---------- */
 .connexion_jc{
-    margin-bottom: 10px;
+    margin-top:80px;
+    margin-bottom:100px;
     border: rgba(0, 0, 0, 0.24) 2px solid;
     border-radius: 5px;
     padding: 5px;
@@ -813,44 +838,6 @@ video {
 }
 /* ------------------ message_alerte --------- */
 
-
-
-
-
-
-/*----------------------formulaire connextion------------------------------*/
-
-
-.label_connexion{
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    margin-top: 6px;
-    margin-bottom: 5px;
-    margin-right: 0px;
-    margin-left: 0px;
-    resize: vertical;
-}
-
-.Form_connexion{
-
-
-    max-width:100%;
-    /*left: 25%;*/
-    top: 20%;
-    background-color: rgba(202, 197, 192, 0.5);
-    padding: 30px;
-    border-radius: 6px;
-}
-.marginRegister {
-    margin-bottom: 20px;
-
-}
-
-
-/* -----------------------  CSS ROMUALD PANIER----------------------------------------- */
 
 
 * {
@@ -874,7 +861,7 @@ video {
 }
 
 .content-table thead tr {
-    background-color: #009879;
+    background-color: rgba(0, 17, 12, 0.98);
     color: #ffffff;
     text-align: left;
     font-weight: bold;
@@ -894,12 +881,12 @@ video {
 }
 
 .content-table tbody tr:last-of-type {
-    border-bottom: 2px solid #009879;
+    border-bottom: 2px solid rgba(4, 1, 2, 0.6);
 }
 
 .content-table tbody tr.active-row {
     font-weight: bold;
-    color: #009879;
+    color: rgba(4, 1, 2, 0.6);
 }
 
 .total{
@@ -909,23 +896,26 @@ video {
 
 .prix_total{
     font-weight: bolder;
-    color: #0000b3;
+    color: black;
 }
 
 .paiement{
     display: flex;
     justify-content: center;
+    margin-left: 400px;
 }
 
 a.payer {
     padding: 10px 30px;
-    background: blue;
+    margin-top: 10px;
+    margin-left: 300px;
+    background: #000061;
     border-radius: 10%;
     color: white;
     text-decoration: none;
 }
 a.payer:hover {
-    background: darkblue;
+    background: #0000ce;
 }
 
 .panier a{
@@ -933,6 +923,20 @@ a.payer:hover {
 }
 
 
+/* ------------------ 21/02/2020 --------- */
+
+/* 5 meilleurs sejours */
+
+.list-group-flush {
+    text-align: center;
+
+}
+.list-group-flush_space {
+    margin-top: 30px;
+}
+/*.message_alerte{*/
+/*    margin-top: 100px;*/
+/*}*/
 
 
 

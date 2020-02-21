@@ -2,6 +2,16 @@
 
 {% block body %}
 
+    {# ----------------------------------------------- image remplace video --------------------------------------#}
+    <div class="banner_imgFixe">
+        <div class="container ">
+            <img src="{{ asset('asset/img/banner_odyssey.jpg') }}" alt="">
+        </div>
+    </div>
+
+<div style="min-height: 100vh">
+
+    <br>
     <div class="panier">
 
         {% if app.user %}
@@ -14,7 +24,7 @@
                     <tr>
                         <th class="centre">Detail</th>
                         <th>Prix</th>
-                        <th>Quantité</th>
+                        <th>Nbre personnes</th>
                         <th>Promo</th>
                         <th>Montant promo</th>
                         <th>Total</th>
@@ -67,7 +77,7 @@
                 </div>
 
             {% else %}
-                <p>Votre panier est vide</p>
+                <p class="text-center mt-5">Votre panier est vide</p>
             {% endif %}
 
         {% else %}
@@ -81,5 +91,9 @@
         {% endif %}
 
     </div>
+
+
+
+</div>
 
 {% endblock %}

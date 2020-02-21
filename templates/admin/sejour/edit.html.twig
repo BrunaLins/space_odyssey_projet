@@ -2,6 +2,15 @@
 
 
 {% block body %}
+
+       {# ----------------------------------------------- image remplace video --------------------------------------#}
+<div class="banner_imgFixe">
+    <div class="container ">
+        <img src="{{ asset('asset/img/banner_odyssey.jpg') }}" alt="">
+    </div>
+</div>
+<div class="container">
+    <br>
     <h1>Edition Séjour</h1>
 
     {{ form_start(form) }}
@@ -51,7 +60,7 @@
 
 
     <div class="text-right">
-        <button type="submit" class="btn btn-primary">
+        <button type="submit" class="btn btn-secondary">
             Enregistrer
         </button>
         <a href="{{ path('app_admin_sejour_index') }}" class="btn btn-outline-secondary">
@@ -72,7 +81,9 @@
         });
     </script>
 
-
+</div>
+<br>
+<br>
 {% endblock %}
 
 

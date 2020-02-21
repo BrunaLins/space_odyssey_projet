@@ -1,28 +1,39 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<h1 style="padding-top:10px">Connexion</h1>
-<form method="post">
-    <div class="form_connexion">
-        <label>Email</label>
-        <input type="email" name="_username" class="label_connexion"
-               value="{{ last_username }}">
-    </div>
-    <div class="form-connexion">
-        <label>Mot de passe</label>
-        <input type="password" name="_password" class="label_connexion">
-    </div>
-    <div style="text-align: right">
-        <button type="submit" class="marginRegister">
-            Se connecter
-        </button>
-    </div>
-    <!-- <div class="text-right">
-            <button type="submit" class="btn btn-danger">
-                Deconnexion
-            </button>
+    {# ----------------------------------------------- image remplace video --------------------------------------#}
+    <div class="banner_imgFixe">
+        <div class="container ">
+            <img src="{{ asset('asset/img/banner_odyssey.jpg') }}" alt="">
         </div>
-    </form>
+    </div>
+
+
+    {# ---------------------------------   formulaire de connexion ------------------------------------------------- #}
+
+    <div class="bg__bonsplans ">
+        <div class=" flex__center">
+            <div class="connexion_jc">
+                <h1 style="padding-top:10px">Connexion</h1>
+                <form method="post">
+                    <div class="form_connexion">
+                        <label>Email</label>
+                        <input type="email" name="_username" class="label_connexion"
+                               value="{{ last_username }}">
+                    </div>
+                    <div class="form-connexion">
+                        <label>Mot de passe</label>
+                        <input type="password" name="_password" class="label_connexion">
+                    </div>
+                    <div class="jc_button" style="text-align: right">
+                        <button type="submit" class="marginRegister">
+                            Se connecter
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 

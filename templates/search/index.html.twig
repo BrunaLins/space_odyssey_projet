@@ -5,12 +5,26 @@
 {% endblock %}
 
 {% block body %}
+
+    {# ----------------------------------------------- image remplace video --------------------------------------#}
+<div class="banner_imgFixe">
+    <div class="container ">
+        <img src="{{ asset('asset/img/banner_odyssey.jpg') }}" alt="">
+    </div>
+</div>
+
+<div style="min-height: 100vh">
+
+
+<div class="container">
+    <br>
+
     <h1>Resultat de votre recherche</h1>
 
     {% for key in result %}
         <div class="card_show">
             <div class="info">
-                <h4 class="titre">{{ key.titre }}</h4>
+                <h4 class="titre"><a class="text-decoration-none" style="color: black" href="{{ path('app_sejour_index', {'id': key.id}) }}"> {{ key.titre }} </a></h4>
 
                 {% if key.promo is null %}
                 {% else %}
@@ -18,31 +32,36 @@
                 {% endif %}
 
                 <div class="description">
-                    <strong>Départ prévu le : {{ key.moisdepart|date('m/Y') }}</strong>
+                    <p><strong>Départ prévu le : {{ key.moisdepart|date('m/Y') }}</strong></p>
                     <p><strong>Détail :</strong> {{ key.description }}</p>
                 </div>
                 <div class="detail_voyage">
                     <div class="detail">
-                        <p><strong>Prix : </strong>{{ key.prixsejour|number_format(2, ",", ".") }} €</p>
+                        <p><strong>Prix : </strong>{{ key.prixsejour|number_format(0, ".", ",") }} €</p>
                         <p><strong>Durée : </strong>{{ key.dureedata }}</p>
                         <p><strong>Destination : </strong>{{ key.destination }}</p>
                         <p><strong>Hébergement: </strong>{{ key.typehebergement }}</p>
                     </div>
                 </div>
                 <div class="validate">
+                    <br>
                     <a href="{{ path('app_index_add',{'id': key.id}) }}">
                         <i class="fas fa-shopping-cart mr-1"></i>
                         Réserver ce séjour
                     </a>
+
                 </div>
 
             </div>
             <div class="image">
-                <img src="{{ asset('images/' ~key.image1) }}" alt="" width="100%" height="100%">
+                <img src="{{ asset('images/' ~key.image1) }}" alt="">
             </div>
         </div>
 
     {% endfor %}
 
+</div>
+
+    </div>
 
 {% endblock %}

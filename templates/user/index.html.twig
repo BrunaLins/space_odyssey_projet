@@ -5,6 +5,14 @@
 {% endblock %}
 
 {% block body %}
+        {# ----------------------------------------------- image remplace video --------------------------------------#}
+<div class="banner_imgFixe">
+    <div class="container ">
+        <img src="{{ asset('asset/img/banner_odyssey.jpg') }}" alt="">
+    </div>
+</div>
+<div class="container">
+    <br>
 
     {% if app.user is null %}
         <li>Veuillez vous inscrire
@@ -36,11 +44,12 @@
                 <p><strong>Pays : </strong>{{ app.user.pays|upper }}</p>
             </div>
             <div>
-                <a href="{{ path('app_user_update') }}" class="btn btn-primary" style="text-decoration: none">
-                    Modifier mon profil
+                <a href="{{ path('app_user_update') }}" class="btn btn-secondary" style="text-decoration: none">
+                    Modifier
                 </a>
             </div>
         </div>
+
         <hr>
         <h1>Mes Commandes</h1>
 
@@ -73,6 +82,6 @@
 
     {% endif %}
 
-
+</div>
 
 {% endblock %}

@@ -1,14 +1,10 @@
-<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarDestinations" aria-controls="navbarDestinations" aria-expanded="false">
-    <span class="navbar-toggler-icon"></span>
-</button>
-<div class="collapse navbar-collapse" id="navbarDestination">
-    <ul class="navbar-nav">
-        {% for premiumdestination in premiumdestinations %}
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('app_search_index2', {'id': premiumdestination.id}) }}">
-              <span style="color: gold">{{ premiumdestination.nom }}</span>
-                </a>
-            </li>
-        {% endfor %}
-    </ul>
-</div>
+
+
+
+{% for premiumdestination in premiumdestinations %}
+    <li>
+        <a href="{{ path('app_search_index2', {'id': premiumdestination.id}) }}">
+             <span style="color: gold">{{ premiumdestination.nom }}</span>
+        </a>
+    </li>
+{% endfor %}

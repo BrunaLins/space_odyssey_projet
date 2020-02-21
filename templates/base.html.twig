@@ -12,9 +12,10 @@
     {% endblock %}
 </head>
 <body>
+{# --------------------------------------- ADMIN NAV  --------------------------------------------- #}
 
 {% if is_granted("ROLE_ADMIN") %}
-    <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-secondary fixed-top">
         <div class="container">
                 <span class="navbar-brand mb-0 h1">
                     Admin
@@ -40,72 +41,100 @@
                             Gestion Users
                         </a>
                     </li>
+
+                    <li class="nav-item">
+
+                        <a class="nav-link" href="{{ path('app_user_logout') }}">Déconnexion</a>
+                    </li>
+
                 </ul>
             </div>
         </div>
     </nav>
 {% endif %}
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-        <a href="{{ path('app_index_index') }}" class="navbar-brand mb-0 h1">
-            {% if app.user is null %}
-                Space Odyssey
-            {% else %}
-                {% if (app.user.premium) %}
-                    <span style="color: gold">  Space Odyssey Premium  </span>
+
+{# -------------------------------------------- NAV  --------------------------------------------------------  #}
+
+
+<header>
+    <!-- nav ok voir avec julien pour burger -->
+    <div class="navbar_odyssey">
+        <nav>
+            <div class="toggle"><i class="fas fa-bars menu"></i></div>
+            <ul class="ulmenu ">
+                <li>
+                    <a href="{{ path('app_index_index') }}" class="navbar-brand mb-0 h1">
+                        {% if app.user is null %}
+                            Space Odyssey
+                        {% else %}
+                            {% if (app.user.premium) %}
+                                <span style="color: gold">  Space Odyssey Premium  </span>
+                            {% else %}
+                                Space Odyssey
+                            {% endif %}
+                        {% endif %}
+                    </a>
+                </li>
+
+                {#                destination #}
+                {{ render(controller('App\\Controller\\DestinationController::menu')) }}
+                {% if app.user is null %}
+                    <span></span>
                 {% else %}
-                    Space Odyssey
-                {% endif %}
-            {% endif %}
-        </a>
-        {{ render(controller('App\\Controller\\DestinationController::menu')) }}
-        {% if app.user is null %}
-            <span></span>
-        {% else %}
-            {% if (app.user.premium) %}
-                {{ render(controller('App\\Controller\\DestinationController::menupremium')) }}
-
-               {# <video autoplay muted id="myVideo">
-                    <source src="asset/video/videoproxima.mp4" type="video/mp4">
-                </video>#}
-            {% endif %}
-        {% endif %}
-
-
-
-        <ul>
-
-            {% if app.user is null %}
-                <li>
-                    <a href="{{ path('app_user_register') }}" class="">Inscription</a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ path('app_user_login') }}" class="">Connexion</a>
-                </li>
-            {% else %}
-                <li class="">
                     {% if (app.user.premium) %}
-                        <span style="color: gold">
-                            <a href="{{ path('app_user_profil') }}" class="text-warning"> {{ app.user }} <i class="fas fa-users"></i></a>
-                        </span>
-                    {% else %}
-                        <span style="color: white">
-                            <a href="{{ path('app_user_profil') }}" class=""> {{ app.user }} <i class="fas fa-users"></i></a>
-                        </span>
+                        {{ render(controller('App\\Controller\\DestinationController::menupremium')) }}
                     {% endif %}
-                </li>
-                <li>
-                    <a href="{{ path('app_user_logout') }}" class="">Déconnexion</a>
-                </li>
-            {% endif %}
-            <li>
-                <a href="{{ path('app_index_panier') }}"><i class="fas fa-shopping-cart"></i></a>
-            </li>
-        </ul>
-    </div>
+                {% endif %}
 
-</nav>
-<div class="container">
+                {#                connexion / deco#}
+
+                {% if app.user is null %}
+                    <li>
+                        <a href="{{ path('app_user_register') }}" class="">Inscription</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ path('app_user_login') }}" class="">Connexion</a>
+                    </li>
+                {% else %}
+                    <li class="">
+                        {% if (app.user.premium) %}
+                            <a href="{{ path('app_user_profil') }}" class="">
+                                <i class="fas fa-users"></i><span style="color: gold">  {{ app.user.prenom }} </span>
+                            </a>
+
+                        {% else %}
+                            <a href="{{ path('app_user_profil') }}" class="">
+                                <i class="fas fa-users"></i><span>  {{ app.user.prenom }} </span>
+                            </a>
+                        {% endif %}
+                    </li>
+                    <li>
+                        <a href="{{ path('app_user_logout') }}" class="">Déconnexion</a>
+                    </li>
+
+                {% endif %}
+
+                <li>
+                    <a href="{{ path('app_index_panier') }}"><i class="fas fa-shopping-cart"></i></a>
+                </li>
+
+
+            </ul>
+        </nav>
+    </div>
+</header>
+
+
+
+
+
+
+
+
+
+{# ----------------------------------------------alerte-------------------------------------------- #}
+
+<div class="container message_alerte">
     {# affichage des messages flash #}
     {% for type, messages in app.session.flashBag.all %}
         {% for message in messages %}
@@ -123,8 +152,118 @@
          <span style="color: gold">  Space Odyssey Premium  </span>
      </div>
      {% endif %}#}
-    {% block body %}{% endblock %}
 </div>
+
+{# ----------------------------------------------- image remplace video --------------------------------------#}
+{#<div class="banner_imgFixe">#}
+{#    <div class="container ">#}
+{#        <img src="{{ asset('asset/img/banner_odyssey.jpg') }}" alt="">#}
+{#    </div>#}
+{#</div>#}
+
+{% block body %}{% endblock %}
+
+
+
+{#   -----------------------------------------------   footer   ----------------------------------------------------     #}
+{% if is_granted("ROLE_ADMIN") %}
+    <div></div>
+
+{% else %}
+    <footer class="footer_bg">
+        <div class="container flex__around" >
+
+            <div>abonnement new letter</div>
+            <div>appeller nous</div>
+            <div>reseau sociaux</div>
+
+        </div>
+
+        <div class="text_footer flex__around">
+            <div>
+                <h3>A PROPOS DE NOUS</h3>
+                <ul>
+                    <li>
+                        <a href="">Qui sommes-nous</a>
+                    </li>
+                    <li>
+                        <a href="">Nos agences</a>
+                    </li>
+                    <li>
+                        <a href="">Space Odyssey recrute</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div>
+                <h3>TOP TREKS</h3>
+                <ul>
+                    <li>
+                        <a href="">Trek Martien</a>
+                    </li>
+                    <li>
+                        <a href="">Trek Alpha Centauri</a>
+                    </li>
+                    <li>
+                        <a href="">Trek Lunaire</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div>
+                <h3>TOP RANDONNEES</h3>
+                <ul>
+                    <li>
+                        <a href="">Randonnées Martien</a>
+                    </li>
+                    <li>
+                        <a href="">Randonnées Alpha Centauri</a>
+                    </li>
+                    <li>
+                        <a href="">Randonnées Lunaire</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div>
+                <h3>INFOS PRATIQUES</h3>
+                <ul>
+                    <li>
+                        <a href="">Nos partenaires</a>
+                    </li>
+                    <li>
+                        <a href="">FAQ / Vos questions</a>
+                    </li>
+                    <li>
+                        <a href="">Santé en voyage</a>
+                    </li>
+
+                </ul>
+            </div>
+
+            <div>
+                <h3>TYPE DE VOYAGE</h3>
+                <ul>
+                    <li>
+                        <a href="">Voyages en groupe</a>
+                    </li>
+                    <li>
+                        <a href="">Voyages en individuel</a>
+                    </li>
+                    <li>
+                        <a href="">Voyages famille</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+{% endif %}
+
+
+
+
+{# ------------------------------------------- script  --------------------------------------------------------   #}
+
 {% block javascripts %}
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
             integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -132,8 +271,7 @@
             integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
             crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/8dac1fed2d.js" crossorigin="anonymous"></script>
-    <script src="{{ asset('lib/bootstrap/bootstrap.min.js') }}"></script>
-
+    {#            <script src="{{ asset('lib/bootstrap/bootstrap.min.js') }}"></script>#}
 {% endblock %}
 </body>
 </html>

@@ -24,7 +24,7 @@ class User implements UserInterface, \Serializable
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=2)
+     * @ORM\Column(type="string", length=3)
      * @Assert\NotBlank(message="La civilité est obligatoire")
      */
     private $civilite;

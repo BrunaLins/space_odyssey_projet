@@ -1,22 +1,37 @@
-
 {% extends 'base.html.twig' %}
 {% block body %}
-    <h1 style="padding-top:10px">Inscription</h1>
-    {{ form_start(form) }}
-
-
-    {{ form_row(form.nom) }}
-    {{ form_row(form.prenom) }}
-    {{ form_row(form.civilite) }}
-    {{ form_row(form.email) }}
-    {{ form_row(form.adresse) }}
-    {{ form_row(form.codepostal) }}
-    {{ form_row(form.ville) }}
-    {{ form_row(form.pays) }}
-    {{ form_row(form.plainPassword) }}
-    <div style="text-align: right">
-        <button type="submit" class="marginRegister">Enregistrer</button>
+    {# ----------------------------------------------- image remplace video --------------------------------------#}
+    <div class="banner_imgFixe">
+        <div class="container ">
+            <img src="{{ asset('asset/img/banner_odyssey.jpg') }}" alt="">
+        </div>
     </div>
-    {{ form_end(form) }}
-    <br>
+
+    {#    ---------------------------------- form enregistrement -------------------------------------- #}
+    <div class="bg__bonsplans">
+        <div class="container flex__center ">
+            <div class="form_register">
+                <h1 style="padding-top:10px">Inscription</h1>
+                {{ form_start(form) }}
+
+
+                {{ form_row(form.nom) }}
+                {{ form_row(form.prenom) }}
+                {{ form_row(form.civilite) }}
+                {{ form_row(form.email) }}
+                {{ form_row(form.adresse) }}
+                {{ form_row(form.codepostal) }}
+                {{ form_row(form.ville) }}
+                {{ form_row(form.pays) }}
+                {{ form_row(form.plainPassword) }}
+
+                <div class="jc_button" style="text-align: right">
+                    <button type="submit" class="marginRegister">Enregistrer</button>
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
 {% endblock %}
+
+

@@ -8,9 +8,13 @@
     <br>
     <br>
     <br>
+    <br>
+
     <div class="container sejour">
         {# Affichage séjour dans sa card détaillée #}
-        <h1>{{ sejour.titre }}</h1>
+        <br>
+        <br>
+        <h1 class="text-center">{{ sejour.titre }}</h1>
         <div>
             <img src="{{ asset('images/' ~ sejour.image1) }}" width="100%">
         </div>
@@ -40,6 +44,7 @@
     </div>
     <br>
     <br>
+    <div class="container">
     <h3>Commentaires</h3>
     {% if app.user is null %}
         <div>Vous devez <a href="{{ path('app_user_login') }}"> vous connecter </a> pour publier un commentaire</div>
@@ -66,6 +71,6 @@
     {% else %}
         <p>Aucun commentaire pour ce sejour</p>
     {% endfor %}
-
+    </div>
 {% endblock %}
 
